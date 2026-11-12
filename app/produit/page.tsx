@@ -1,174 +1,65 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
-import { Heart, ShieldCheck, Star, Truck, ChevronRight, ChevronLeft } from "lucide-react";
+import { ArrowRight, Check, CircleHelp, Feather, Flower2, Gift, LockKeyhole, ShoppingBag, Sparkles, Star, Truck, UserRound, Waves } from "lucide-react";
 import { useStore } from "@/components/store-provider";
 import { product } from "@/lib/site-data";
 
-const galleryImages = [
-  "/massseur/produit1.png",
-  "/massseur/produit2.png",
-  "/massseur/produit%203.png",
-  "/massseur/produit4.png",
-  "/massseur/produit5.png",
+const views = ["La ceinture Princess Bloom sur un satin rose", "La sangle ajustable et sa boucle", "Le réglage de la chaleur", "La ceinture portée au quotidien", "Le coffret Princess Bloom"];
+const questions = [
+  { question: "Elle chauffe jusqu’à combien ?", answer: "La chaleur se règle sur 5 niveaux. Consultez la notice pour les températures exactes et commencez toujours par le niveau le plus doux." },
+  { question: "Est-ce sans fil ?", answer: "Oui, la ceinture s’utilise sans fil après recharge avec son câble USB." },
+  { question: "Est-ce confortable à porter ?", answer: "Sa sangle ajustable permet de l’adapter à votre taille. Légère et discrète, elle accompagne vos mouvements au quotidien." },
+  { question: "Comment la nettoyer ?", answer: "Éteignez et débranchez la ceinture, puis nettoyez-la avec un chiffon légèrement humide. Ne la plongez pas dans l’eau." },
 ];
+function ProductVisual({ view = 0, className = "" }: { view?: number; className?: string }) {
+  return <div role="img" aria-label={views[view] ?? "Pochette, câble USB et poche de gel roses"} className={`pb-visual pb-view-${view} ${className}`} />;
+}
 
 export default function ProductPage() {
   const { addToCart } = useStore();
-  const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState(0);
-
-  const showPreviousImage = () => {
-    setActiveImage((current) => (current === 0 ? galleryImages.length - 1 : current - 1));
-  };
-
-  const showNextImage = () => {
-    setActiveImage((current) => (current === galleryImages.length - 1 ? 0 : current + 1));
-  };
-
-  const handleAddToCart = () => {
-    addToCart({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      quantity,
-    });
-  };
-
+  const [offer, setOffer] = useState("duo");
+  const [added, setAdded] = useState(false);
+  const [openQuestion, setOpenQuestion] = useState<number | null>(null);
+  const price = offer === "duo" ? 149 : product.price;
+  function handleAddToCart() {
+    addToCart({ id: offer === "duo" ? `${product.id}-pack` : product.id, name: offer === "duo" ? "Pack Bien-être Complet — Princess Bloom" : product.name, price, quantity: 1, image: "/massseur/produit1.png" });
+    setAdded(true);
+    window.setTimeout(() => setAdded(false), 3500);
+  }
   return (
-    <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      <div className="mb-8 flex items-center gap-2 text-sm text-[#493238]/60">
-        <Link href="/">Accueil</Link>
-        <ChevronRight className="h-4 w-4" />
-        <span>Produit</span>
+    <main className="pb-product">
+      <div className="pb-product-inner">
+        <section className="pb-gallery" aria-label="Photos du produit">
+          <div className="pb-hero-row">
+            <div className="pb-hero"><ProductVisual view={activeImage} /><span className="pb-ribbon">BEST-SELLER 🔥</span></div>
+            <div className="pb-benefit-icons">
+              <div><span><Waves /></span><strong>Chaleur<br />personnalisable</strong></div>
+              <div><span><Flower2 /></span><strong>Massage<br />relaxant</strong></div>
+              <div><span><Feather /></span><strong>Discrétion<br />au quotidien</strong></div>
+            </div>
+          </div>
+          <div className="pb-thumbnails">{views.map((label, index) => <button key={label} onClick={() => setActiveImage(index)} aria-label={label} aria-pressed={activeImage === index} className={activeImage === index ? "is-active" : ""}><ProductVisual view={index} /></button>)}</div>
+        </section>
+        <section className="pb-details" aria-label="Choisir votre ceinture">
+          <div className="pb-reviews"><Link href="/avis" className="pb-rating"><span>{Array.from({ length: 5 }, (_, i) => <Star key={i} />)}</span><span><b>4,9/5</b> (1 327 avis vérifiés)</span></Link><span className="pb-community"><UserRound /><b>+50 000 femmes soulagées</b></span></div>
+          <h1>Ceinture chauffante et massante<br className="pb-title-break" /> Princess Bloom</h1>
+          <div className="pb-price"><strong>89,00 €</strong><del>119,00 €</del><span>-25 %</span></div>
+          <ul className="pb-features">{["Soulage efficacement les douleurs de règles", "Chaleur douce et réglable (5 niveaux)", "Massage relaxant (4 modes de vibration)", "Confortable, légère et discrète"].map(text => <li key={text}><Check />{text}</li>)}</ul>
+          <fieldset className="pb-offers"><legend className="sr-only">Choisissez votre offre</legend><div className="pb-offer-banner">🔥 MEILLEURE OFFRE DUO</div>
+            <label className={`pb-offer pb-pack ${offer === "duo" ? "is-selected" : ""}`}><input type="radio" name="offer" value="duo" checked={offer === "duo"} onChange={() => setOffer("duo")} /><span className="pb-radio" /><span className="pb-offer-content"><span className="pb-offer-heading"><span><strong>Pack Bien-être Complet</strong><small>La solution complète pour un confort absolu</small></span><span className="pb-offer-price"><strong>149,00 €</strong><del>209,00 €</del><em>-29 %</em></span></span><span className="pb-bundle"><ProductVisual /><b>+</b><ProductVisual view={5} /></span><span className="pb-bundle-caption">Ceinture + Pochette + Câble USB + Poche de gel</span><span className="pb-gifts"><Gift /> 4 CADEAUX OFFERTS · 120 € DE VALEUR</span></span></label>
+            <label className={`pb-offer pb-single ${offer === "single" ? "is-selected" : ""}`}><input type="radio" name="offer" value="single" checked={offer === "single"} onChange={() => setOffer("single")} /><span className="pb-radio" /><span className="pb-offer-heading"><span><strong>Ceinture seule</strong><small>Le confort essentiel</small></span><span className="pb-offer-price"><strong>89,00 €</strong><del>119,00 €</del></span></span></label>
+          </fieldset>
+          <button className="pb-add" onClick={handleAddToCart}><ShoppingBag />Ajouter au panier<ArrowRight /></button>
+          <div className="pb-payment"><strong><LockKeyhole /> Paiement sécurisé</strong><div className="pb-payment-logos" aria-label="Moyens de paiement"><span className="pb-amex">AMEX</span><span className="pb-apple"> Pay</span><span className="pb-google"><i>G</i> Pay</span><span className="pb-mastercard"><i /><i /></span><span className="pb-paypal">P</span><span className="pb-klarna">Klarna</span><span className="pb-visa">VISA</span></div></div>
+          <section className="pb-questions"><h2><Sparkles />Une question sur cette ceinture ?</h2><div className="pb-question-grid">{questions.map(({question, answer}, i) => <div key={question}><button aria-expanded={openQuestion === i} aria-controls={`answer-${i}`} onClick={() => setOpenQuestion(openQuestion === i ? null : i)}><CircleHelp />{question}</button>{openQuestion === i && <p id={`answer-${i}`}>{answer}</p>}</div>)}</div></section>
+          <Link className="pb-shipping" href="/livraison"><Truck /><span><strong>Livraison en 5 à 10 jours ouvrés · Livraison offerte</strong><small>Préparée et expédiée sous 48 h, avec un suivi de commande.</small></span></Link>
+        </section>
       </div>
-
-      <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="space-y-5">
-          <div className="relative overflow-hidden rounded-[2rem] border border-[#493238]/10 bg-[#f7ecea] p-2 shadow-[0_25px_60px_rgba(73,50,56,0.08)]">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-[radial-gradient(circle_at_top,#f7e7ea_0%,#efdbdd_38%,#e4c1c9_100%)]">
-              <Image src={galleryImages[activeImage]} alt="Vue produit Princess Bloom" fill className="object-contain p-6" priority />
-            </div>
-
-            <button
-              onClick={showPreviousImage}
-              aria-label="Image précédente"
-              className="absolute left-5 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-[#493238]/10 bg-white/90 text-[#493238] shadow-md transition hover:bg-white"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </button>
-
-            <button
-              onClick={showNextImage}
-              aria-label="Image suivante"
-              className="absolute right-5 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-[#493238]/10 bg-white/90 text-[#493238] shadow-md transition hover:bg-white"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </button>
-          </div>
-
-          <div className="grid grid-cols-3 gap-3 md:grid-cols-6">
-            {galleryImages.map((src, index) => (
-              <button
-                key={src}
-                type="button"
-                onClick={() => setActiveImage(index)}
-                className={`overflow-hidden rounded-[1rem] border p-1 transition ${activeImage === index ? "border-[#b77b8c] ring-2 ring-[#f1dbe0]" : "border-[#493238]/10"}`}
-                aria-label={`Afficher l’image ${index + 1}`}
-              >
-                <div className="relative aspect-[4/5] overflow-hidden rounded-[0.8rem] bg-[radial-gradient(circle_at_top,#f7e7ea_0%,#efdbdd_38%,#e4c1c9_100%)]">
-                  <Image src={src} alt={`Vue produit ${index + 1}`} fill className="object-contain p-1" />
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="space-y-8">
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#b77b8c]">Princess Bloom</p>
-            <h1 className="mt-3 text-4xl font-semibold leading-tight text-[#493238]">Ceinture chauffante & massante menstruelle</h1>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-1 text-[#d4a026]">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="h-4 w-4 fill-current" />
-              ))}
-            </div>
-            <span className="text-sm text-[#493238]/70">4,9/5 • +200 avis</span>
-          </div>
-
-          <div className="flex items-end gap-3">
-            <span className="text-4xl font-semibold text-[#493238]">89,00 €</span>
-            <span className="text-lg text-[#493238]/40 line-through">119,00 €</span>
-          </div>
-
-          <div className="rounded-[1.75rem] border border-[#493238]/10 bg-[#fffaf8] p-5">
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-[#493238]/70">Quantité</span>
-              <div className="flex items-center gap-3 rounded-full border border-[#493238]/10 bg-white px-3 py-2">
-                <button onClick={() => setQuantity((q) => Math.max(1, q - 1))} className="text-xl text-[#493238]">−</button>
-                <span className="min-w-6 text-center text-sm font-medium text-[#493238]">{quantity}</span>
-                <button onClick={() => setQuantity((q) => q + 1)} className="text-xl text-[#493238]">+</button>
-              </div>
-            </div>
-
-            <button onClick={handleAddToCart} className="mt-5 w-full rounded-full bg-[#b77b8c] px-5 py-4 text-base font-semibold text-white shadow-[0_18px_30px_rgba(183,123,140,0.35)] transition hover:bg-[#a8647c]">
-              Ajouter au panier
-            </button>
-
-            <div className="mt-4 flex items-center justify-between rounded-full bg-[#f4e5e8] px-3 py-2 text-xs font-medium text-[#493238]">
-              <span>Livraison sous 48h</span>
-              <span>paiement sécurisé</span>
-            </div>
-          </div>
-
-          <div className="grid gap-3 sm:grid-cols-2">
-            <div className="rounded-[1.4rem] border border-[#493238]/10 bg-[#f9efe9] p-4">
-              <p className="text-xs uppercase tracking-[0.15em] text-[#b77b8c]">Confiance</p>
-              <p className="mt-2 text-sm font-semibold text-[#493238]">2 400+ clientes satisfaites</p>
-            </div>
-            <div className="rounded-[1.4rem] border border-[#493238]/10 bg-[#f9efe9] p-4">
-              <p className="text-xs uppercase tracking-[0.15em] text-[#b77b8c]">Risque zéro</p>
-              <p className="mt-2 text-sm font-semibold text-[#493238]">Retour 30 jours garanti</p>
-            </div>
-            <div className="rounded-[1.4rem] border border-[#493238]/10 bg-[#f9efe9] p-4 sm:col-span-2">
-              <p className="text-xs uppercase tracking-[0.15em] text-[#b77b8c]">Un achat rapide</p>
-              <p className="mt-2 text-sm font-semibold text-[#493238]">Commande en moins de 2 minutes • 1 clic pour passer au paiement</p>
-            </div>
-          </div>
-
-          <div className="grid gap-3 sm:grid-cols-3">
-            <div className="rounded-[1.5rem] border border-[#493238]/10 bg-[#f9efe9] p-4">
-              <Truck className="h-5 w-5 text-[#b77b8c]" />
-              <p className="mt-3 text-sm font-medium text-[#493238]">Livraison en 3-5 jours</p>
-            </div>
-            <div className="rounded-[1.5rem] border border-[#493238]/10 bg-[#f9efe9] p-4">
-              <ShieldCheck className="h-5 w-5 text-[#b77b8c]" />
-              <p className="mt-3 text-sm font-medium text-[#493238]">Garantie 2 ans</p>
-            </div>
-            <div className="rounded-[1.5rem] border border-[#493238]/10 bg-[#f9efe9] p-4">
-              <Heart className="h-5 w-5 text-[#b77b8c]" />
-              <p className="mt-3 text-sm font-medium text-[#493238]">Retour 30 jours</p>
-            </div>
-          </div>
-
-          <div className="rounded-[1.75rem] border border-[#493238]/10 bg-[#fffaf8] p-6">
-            <h2 className="text-lg font-semibold text-[#493238]">Ce que comprend l’offre</h2>
-            <ul className="mt-4 space-y-3 text-sm leading-6 text-[#493238]/75">
-              {product.features.map((feature) => (
-                <li key={feature} className="flex items-center gap-3">
-                  <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#b77b8c]" />
-                  {feature}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
+      <div className="pb-sticky-cart"><div className="pb-sticky-summary"><ProductVisual /><span><strong>{offer === "duo" ? "Pack Bien-être Complet" : "Ceinture chauffante et massante"}</strong><b>{price.toFixed(2).replace(".", ",")} €</b></span></div><button className="pb-add" onClick={handleAddToCart}>Ajouter au panier<ArrowRight /></button></div>
+      {added && <div className="pb-added" role="status"><Check />{offer === "duo" ? "Pack" : "Ceinture"} ajouté au panier<Link href="/panier">Voir le panier <ArrowRight /></Link></div>}
     </main>
   );
 }

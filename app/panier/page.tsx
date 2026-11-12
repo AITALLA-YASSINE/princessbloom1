@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import { useStore } from "@/components/store-provider";
@@ -24,7 +25,14 @@ export default function CartPage() {
             {cart.map((item) => (
               <div key={item.id} className="flex flex-col gap-4 rounded-[1.75rem] border border-[#493238]/10 bg-[#fffaf8] p-5 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-4">
-                  <div className="h-20 w-20 rounded-[1.25rem] bg-[radial-gradient(circle_at_top,#f7e7ea_0%,#efdbdd_38%,#e4c1c9_100%)]" />
+                  <div className="relative h-20 w-20 overflow-hidden rounded-[1.25rem] bg-[radial-gradient(circle_at_top,#f7e7ea_0%,#efdbdd_38%,#e4c1c9_100%)]">
+                    <Image
+                      src={item.image ?? "/massseur/produit1.png"}
+                      alt={item.name}
+                      fill
+                      className="object-contain p-2"
+                    />
+                  </div>
                   <div>
                     <p className="font-medium text-[#493238]">{item.name}</p>
                     <p className="text-sm text-[#493238]/70">{item.price.toFixed(2)} €</p>
