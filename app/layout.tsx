@@ -4,6 +4,7 @@ import "./globals.css";
 import { ChatbotWidget } from "@/components/chatbot-widget";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { CartDrawer } from "@/components/cart-drawer";
 import { StoreProvider } from "@/components/store-provider";
 
 const display = Cormorant_Garamond({
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="min-h-[calc(100vh-13rem)]">{children}</div>
           <SiteFooter />
           <ChatbotWidget />
+          <CartDrawer />
         </StoreProvider>
       </body>
     </html>

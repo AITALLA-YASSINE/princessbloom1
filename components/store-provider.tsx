@@ -12,6 +12,8 @@ export type CartItem = {
 
 type StoreContextValue = {
   cart: CartItem[];
+  cartDrawerOpen: boolean;
+  closeCartDrawer: () => void;
   addToCart: (item: CartItem) => void;
   updateQuantity: (id: string, quantity: number) => void;
   removeFromCart: (id: string) => void;
@@ -33,35 +35,40 @@ const ORDER_KEY = "princessbloom-order";
 const StoreContext = createContext<StoreContextValue | undefined>(undefined);
 
 export function StoreProvider({ children }: { children: React.ReactNode }) {
-  const [cart, setCart] = useState<CartItem[]>(() => {
-    if (typeof window === "undefined") return [];
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [storageReady, setStorageReady] = useState(false);
+  const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
+  const closeCartDrawer = () => setCartDrawerOpen(false);
+  const [promoCode, setPromoCode] = useState("");
+  const [orderData, setOrderDataState] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    // Restore browser storage after hydration so the first render matches the server.
+    /* eslint-disable react-hooks/set-state-in-effect */
     try {
       const storedCart = localStorage.getItem(CART_KEY);
-      return storedCart ? JSON.parse(storedCart) : [];
-    } catch {
-      return [];
-    }
-  });
-  const [promoCode, setPromoCode] = useState("");
-  const [orderData, setOrderDataState] = useState<Record<string, string>>(() => {
-    if (typeof window === "undefined") return {};
+      if (storedCart) setCart(JSON.parse(storedCart));
+    } catch { /* Keep an empty cart if storage is unavailable or invalid. */ }
     try {
       const storedOrder = localStorage.getItem(ORDER_KEY);
-      return storedOrder ? JSON.parse(storedOrder) : {};
-    } catch {
-      return {};
-    }
-  });
+      if (storedOrder) setOrderDataState(JSON.parse(storedOrder));
+    } catch { /* Keep empty order data if storage is unavailable or invalid. */ }
+    setStorageReady(true);
+    /* eslint-enable react-hooks/set-state-in-effect */
+  }, []);
 
   useEffect(() => {
-    localStorage.setItem(CART_KEY, JSON.stringify(cart));
-  }, [cart]);
+    if (!storageReady) return;
+    try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch { /* The cart still works without persistence. */ }
+  }, [cart, storageReady]);
 
   useEffect(() => {
-    localStorage.setItem(ORDER_KEY, JSON.stringify(orderData));
-  }, [orderData]);
+    if (!storageReady) return;
+    try { localStorage.setItem(ORDER_KEY, JSON.stringify(orderData)); } catch { /* Checkout still works without persistence. */ }
+  }, [orderData, storageReady]);
 
   const addToCart = (item: CartItem) => {
+    setCartDrawerOpen(true);
     setCart((current) => {
       const existing = current.find((entry) => entry.id === item.id);
       if (existing) {
@@ -99,9 +106,10 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
     [cart],
   );
 
-  const shipping = subtotal > 0 ? (promoCode === "PRINCESSBLOOM10" ? 0 : 6.9) : 0;
+  const shipping = 0;
 
-  const discount = promoCode === "PRINCESSBLOOM10" ? subtotal * 0.1 : 0;
+  const normalizedPromo = promoCode.trim().toUpperCase();
+  const discount = Math.round(subtotal * (normalizedPromo === "PRINCESSBLOOM10" ? 0.1 : normalizedPromo === "PRINCESSBLOOM5" ? 0.05 : 0) * 100) / 100;
 
   const total = subtotal + shipping - discount;
 
@@ -111,6 +119,8 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
 
   const value: StoreContextValue = {
     cart,
+    cartDrawerOpen,
+    closeCartDrawer,
     addToCart,
     updateQuantity,
     removeFromCart,

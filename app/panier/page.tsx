@@ -80,7 +80,7 @@ export default function CartPage() {
               <span>{total.toFixed(2)} €</span>
             </div>
 
-            <Link href="/livraison" className="mt-6 inline-flex w-full justify-center rounded-full bg-[#b77b8c] px-6 py-3 text-sm font-medium text-white">
+            <Link href="/paiement" className="mt-6 inline-flex w-full justify-center rounded-full bg-[#b77b8c] px-6 py-3 text-sm font-medium text-white">
               Passer au paiement
             </Link>
           </aside>

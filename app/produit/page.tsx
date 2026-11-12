@@ -21,13 +21,10 @@ export default function ProductPage() {
   const { addToCart } = useStore();
   const [activeImage, setActiveImage] = useState(0);
   const [offer, setOffer] = useState("duo");
-  const [added, setAdded] = useState(false);
   const [openQuestion, setOpenQuestion] = useState<number | null>(null);
   const price = offer === "duo" ? 149 : product.price;
   function handleAddToCart() {
     addToCart({ id: offer === "duo" ? `${product.id}-pack` : product.id, name: offer === "duo" ? "Pack Bien-être Complet — Princess Bloom" : product.name, price, quantity: 1, image: "/massseur/produit1.png" });
-    setAdded(true);
-    window.setTimeout(() => setAdded(false), 3500);
   }
   return (
     <main className="pb-product">
@@ -59,7 +56,6 @@ export default function ProductPage() {
         </section>
       </div>
       <div className="pb-sticky-cart"><div className="pb-sticky-summary"><ProductVisual /><span><strong>{offer === "duo" ? "Pack Bien-être Complet" : "Ceinture chauffante et massante"}</strong><b>{price.toFixed(2).replace(".", ",")} €</b></span></div><button className="pb-add" onClick={handleAddToCart}>Ajouter au panier<ArrowRight /></button></div>
-      {added && <div className="pb-added" role="status"><Check />{offer === "duo" ? "Pack" : "Ceinture"} ajouté au panier<Link href="/panier">Voir le panier <ArrowRight /></Link></div>}
     </main>
   );
 }
