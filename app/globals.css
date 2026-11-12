@@ -353,6 +353,26 @@ a {
   }
 }
 /* Homepage refinements: deliberately scoped to preserve every other route. */
+.homepage-shell .hero-social-proof { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 27px; color: #641b3b; font-size: 12px; line-height: 1.5; }
+.homepage-shell .hero-review-summary,.homepage-shell .hero-community-summary { display: inline-flex; align-items: center; gap: 9px; }
+.homepage-shell .hero-review-summary { border-radius: 4px; transition: color .2s; }
+.homepage-shell .hero-review-summary:hover { color: #ad4e70; }
+.homepage-shell .hero-review-summary:focus-visible { outline: 2px solid #bd728d; outline-offset: 5px; }
+.homepage-shell .hero-review-stars { display: inline-flex; gap: 1px; color: #b87b2b; }
+.homepage-shell .hero-review-stars svg { width: 18px; height: 18px; fill: #d9a65f; stroke-width: 1; }
+.homepage-shell .hero-social-proof strong { color: #441629; font-weight: 700; }
+.homepage-shell .hero-social-divider { height: 25px; width: 1px; background: #ebc7ce; }
+.homepage-shell .hero-community-summary > svg { width: 24px; height: 24px; flex: none; stroke-width: 1.5; }
+@media (max-width: 639px) {
+  .homepage-shell .hero-social-proof { gap: 10px; font-size: 10px; }
+  .homepage-shell .hero-review-summary,.homepage-shell .hero-community-summary { gap: 5px; }
+  .homepage-shell .hero-review-stars svg { width: 14px; height: 14px; }
+  .homepage-shell .hero-community-summary > svg { width: 20px; height: 20px; }
+}
+@media (max-width: 389px) {
+  .homepage-shell .hero-social-divider { display: none; }
+  .homepage-shell .hero-community-summary { flex-basis: 100%; }
+}
 .homepage-shell {
   isolation: isolate;
   background: radial-gradient(ellipse at 75% 12%, #ebc7ce80, transparent 35%), radial-gradient(ellipse at 8% 20%, #ebc7ce70, transparent 26%), linear-gradient(125deg, #fff9f7, #f9efed 38%, #f8e5e7 65%, #fff9f7);

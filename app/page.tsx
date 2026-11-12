@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Flame, Heart, ShieldCheck, Sparkles, SunMedium, Waves, Flower2, CalendarCheck, LockKeyhole, Truck, RefreshCw } from "lucide-react";
+import { ArrowRight, Flame, Heart, ShieldCheck, Sparkles, Star, UsersRound, SunMedium, Waves, Flower2, CalendarCheck, LockKeyhole, Truck, RefreshCw } from "lucide-react";
 import { ProductArt } from "@/components/product-art";
 import { HeroBlossoms } from "@/components/hero-blossoms";
 import { product } from "@/lib/site-data";
@@ -101,6 +101,20 @@ export default function Home() {
               <Link href="/comment-ca-marche" className="hero-button-secondary inline-flex items-center gap-2 rounded-full border border-[#493238]/15 bg-white/80 px-6 py-3.5 text-sm font-semibold text-[#493238] transition-all duration-200 hover:border-[#d9a65f]/60 hover:text-[#641b3b]">
                 Comment ça fonctionne ?
               </Link>
+            </div>
+
+            <div className="hero-social-proof">
+              <Link href="/avis" className="hero-review-summary" aria-label="Note de 4,9 sur 5, sur 8 600 avis vérifiés">
+                <span className="hero-review-stars" aria-hidden="true">
+                  {Array.from({ length: 5 }, (_, index) => <Star key={index} />)}
+                </span>
+                <span><strong>4,9/5</strong> <span className="hero-review-count">(8 600 avis vérifiés)</span></span>
+              </Link>
+              <span className="hero-social-divider" aria-hidden="true" />
+              <span className="hero-community-summary">
+                <UsersRound aria-hidden="true" />
+                <span><strong>+1 000</strong> femmes soulagées</span>
+              </span>
             </div>
 
             <div className="mt-8 grid gap-3 sm:grid-cols-3">
