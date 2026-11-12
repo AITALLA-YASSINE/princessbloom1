@@ -3,9 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Flame, Heart, ShieldCheck, Sparkles, Star, SunMedium } from "lucide-react";
+import { ArrowRight, Flame, Heart, ShieldCheck, Sparkles, SunMedium, Waves, Flower2, CalendarCheck, LockKeyhole, Truck, RefreshCw } from "lucide-react";
 import { ProductArt } from "@/components/product-art";
-import { testimonials } from "@/lib/site-data";
+import { HeroBlossoms } from "@/components/hero-blossoms";
 import { product } from "@/lib/site-data";
 
 const heroBenefits = [
@@ -59,54 +59,83 @@ const productGallery = [
 
 export default function Home() {
   return (
-    <main className="pb-20">
-      <section className="mx-auto max-w-7xl px-4 pb-12 pt-10 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+    <main className="homepage-shell pb-20">
+      <div className="hero-decorations pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <div className="blossom-corner blossom-corner-top"><HeroBlossoms /></div>
+        <div className="blossom-corner blossom-corner-bottom"><HeroBlossoms /></div>
+        <div className="hero-blur hero-blur-left" />
+        <div className="hero-blur hero-blur-right" />
+        <div className="hero-petal petal-a" />
+        <div className="hero-petal petal-b" />
+        <div className="hero-petal petal-c" />
+        <div className="hero-arc hero-arc-left" />
+        <div className="hero-arc hero-arc-right" />
+      </div>
+
+      <section className="hero-section relative mx-auto max-w-[1280px] px-4 pb-10 pt-8 sm:px-6 lg:px-8">
+        <div className="grid items-center gap-10 lg:grid-cols-[0.95fr_1.05fr]">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <div className="mb-5 inline-flex items-center rounded-full px-2 py-1">
+            <div className="mb-6 inline-flex items-center rounded-full px-2 py-1">
               <Image src="/massseur/logovrai.png" alt="Princess Bloom" width={220} height={58} className="h-10 w-auto object-contain sm:h-12" />
             </div>
-            <h1 className="text-5xl leading-[0.95] text-[#493238] sm:text-6xl">
-              Votre confort, sans compromis. <br />
-              Votre vie continue.
-            </h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-[#493238]/75">
+
+            <div className="hero-title-wrap">
+              <h1 className="hero-title text-[#493238]">
+                <span>Calmer la</span> <span className="hero-highlight italic">douleur</span> <span>de vos règles</span>
+              </h1>
+              <div className="hero-title-curve" aria-hidden="true">
+                <span className="hero-title-heart">
+                  <Heart className="h-3.5 w-3.5" strokeWidth={1.5} />
+                </span>
+              </div>
+            </div>
+
+            <p className="mt-5 max-w-xl text-lg leading-8 text-[#493238]/75 sm:text-[1.08rem]">
               Découvrez la ceinture chauffante et massante pensée pour vous accompagner sans rien interrompre.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              <Link href="/produit" className="inline-flex items-center gap-2 rounded-full bg-[#b77b8c] px-6 py-3.5 text-sm font-medium text-white shadow-[0_18px_30px_rgba(183,123,140,0.35)] transition hover:bg-[#a8647c]">
+              <Link href="/produit" className="hero-button-primary inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold text-white shadow-[0_18px_30px_rgba(100,27,59,0.36)] transition-transform duration-200 hover:-translate-y-0.5">
                 Découvrir ma ceinture <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link href="/comment-ca-marche" className="inline-flex items-center gap-2 rounded-full border border-[#493238]/15 bg-white px-6 py-3.5 text-sm font-medium text-[#493238] transition hover:border-[#b77b8c]/40 hover:text-[#b77b8c]">
+              <Link href="/comment-ca-marche" className="hero-button-secondary inline-flex items-center gap-2 rounded-full border border-[#493238]/15 bg-white/80 px-6 py-3.5 text-sm font-semibold text-[#493238] transition-all duration-200 hover:border-[#d9a65f]/60 hover:text-[#641b3b]">
                 Comment ça fonctionne ?
               </Link>
             </div>
 
             <div className="mt-8 grid gap-3 sm:grid-cols-3">
-              {heroBenefits.map((benefit) => (
-                <div key={benefit} className="rounded-[1.25rem] border border-[#493238]/10 bg-[#fffaf8] px-4 py-3 text-sm font-medium text-[#493238] shadow-sm">
-                  {benefit}
+              {heroBenefits.map((benefit, index) => (
+                <div key={benefit} className="feature-pill rounded-[1.25rem] border border-[#d7b9c0]/80 bg-[#fffaf8]/90 px-4 py-3 text-sm font-medium text-[#493238] shadow-[0_10px_18px_rgba(73,50,56,0.04)]">
+                  {index === 0 ? <Waves aria-hidden="true" /> : index === 1 ? <Flower2 aria-hidden="true" /> : <CalendarCheck aria-hidden="true" />}
+                  <span>{benefit}</span>
                 </div>
               ))}
             </div>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 0.1 }} className="rounded-[2rem] border border-[#493238]/10 bg-[#f9efe9] p-3 shadow-[0_25px_60px_rgba(73,50,56,0.08)]">
-            <div className="relative overflow-hidden rounded-[1.7rem] bg-[radial-gradient(circle_at_top,#f7e7ea_0%,#efdbdd_38%,#e4c1c9_100%)]">
-              <div className="relative h-[630px] w-full">
-                <Image src="/massseur/produit1.png" alt="Princess Bloom produit" fill className="object-contain p-8" priority />
+          <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 0.1 }} className="hero-product-panel relative mx-auto w-full max-w-[640px]">
+            <div className="product-glow" aria-hidden="true" />
+            <div className="product-badge">✨ Votre moment de douceur</div>
+            <div className="product-card rounded-[2.1rem] border border-[#fff9f7]/80 bg-[radial-gradient(circle_at_top,#f9e8eb_0%,#f3dfe6_30%,#eed6db_60%,#f6e7ea_100%)] p-3 shadow-[0_30px_60px_rgba(132,92,104,0.18)]">
+              <div className="relative overflow-hidden rounded-[1.7rem] bg-[radial-gradient(circle_at_top,#f7e7ea_0%,#efdbdd_38%,#e4c1c9_100%)]">
+                <div className="hero-sparkle hero-sparkle-one" aria-hidden="true" />
+                <div className="hero-sparkle hero-sparkle-two" aria-hidden="true" />
+                <div className="hero-sparkle hero-sparkle-three" aria-hidden="true" />
+                <div className="hero-product-image relative h-[470px] w-full sm:h-[540px] md:h-[610px]">
+                  <Image src="/massseur/produit1.png" alt="Princess Bloom produit" fill className="object-contain" sizes="(max-width: 1023px) 92vw, 620px" priority />
+                </div>
               </div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-3 sm:px-6 lg:px-8">
+      <section className="hero-services relative mx-auto max-w-6xl px-4 py-3 sm:px-6 lg:px-8">
         <div className="overflow-hidden rounded-full border border-[#493238]/10 bg-white/80 shadow-[0_12px_28px_rgba(73,50,56,0.06)] backdrop-blur-sm">
           <div className="promo-track py-3 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#493238]/80" aria-label="Informations de service">
             {[...marqueeItems, ...marqueeItems].map((item, index) => (
               <span key={`${item}-${index}`} className="inline-flex items-center gap-3">
+                {index % 3 === 0 ? <LockKeyhole aria-hidden="true" /> : index % 3 === 1 ? <Truck aria-hidden="true" /> : <RefreshCw aria-hidden="true" />}
                 {item}
                 <span className="h-1.5 w-1.5 rounded-full bg-[#b77b8c]" aria-hidden="true" />
               </span>
