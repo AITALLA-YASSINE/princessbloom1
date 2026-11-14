@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { ShoppingBag, Menu, X } from "lucide-react";
@@ -18,10 +19,13 @@ const navItems = [
 
 export function SiteHeader() {
   const { itemCount } = useStore();
+  const pathname = usePathname();
+  // Cached pages remain in the DOM; checkout visibility must follow the active URL.
+  const isCheckout = pathname === "/paiement" || pathname === "/livraison";
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="pb-header" onKeyDown={event => { if (event.key === "Escape") setMenuOpen(false); }}>
+    <header className="pb-header" data-checkout={isCheckout ? "true" : undefined} onKeyDown={event => { if (event.key === "Escape") setMenuOpen(false); }}>
       <div className="pb-header-inner">
         <button type="button" className="pb-menu-toggle" aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"} aria-expanded={menuOpen} aria-controls="site-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</button>
         <Link href="/" className="pb-wordmark" aria-label="Princess Bloom, accueil" onClick={() => setMenuOpen(false)}><Image src="/massseur/logovrai.png" alt="Princess Bloom" width={1928} height={815} className="h-10 w-auto object-contain md:h-12" preload /></Link>

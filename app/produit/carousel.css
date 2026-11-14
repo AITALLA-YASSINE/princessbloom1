@@ -22,3 +22,17 @@
 
 /* Replace only the third product photo; retain the full comparison framing. */
 .pb-gallery .pb-view-2 { background-image: url("/photos/comparison-real-belt-v2.webp"); background-size: contain; background-position: center; }
+/* Larger photographs only; preserve the page columns and existing controls. */
+.pb-gallery .pb-hero .pb-view-0 { background-size: 110% auto; }
+.pb-gallery .pb-hero .pb-view-1 { background-size: 108% auto; }
+.pb-gallery .pb-hero .pb-view-3,
+.pb-gallery .pb-hero .pb-view-4 { background-size: cover; }
+@media (max-width: 1049px) {
+  .pb-gallery { margin-top: -20px; }
+  .pb-gallery .pb-hero-row { width: calc(100% + 48px); margin-inline: -24px; grid-template-columns: minmax(0,4fr) minmax(0,1fr); gap: 0; }
+  .pb-gallery .pb-hero { aspect-ratio: 1.15; }
+}
+@media (max-width: 599px) {
+  .pb-gallery { margin-top: -15px; }
+  .pb-gallery .pb-hero-row { width: calc(100% + 24px); margin-inline: -12px; }
+}
