@@ -4,7 +4,7 @@ const assert = require('node:assert/strict');
 const { getChatbotReply } = require('../lib/chatbot.js');
 
 test('chatbot answers common product questions', () => {
-  assert.match(getChatbotReply('prix'), /89,00 €/i);
+  assert.match(getChatbotReply('prix'), /39,99 €/i);
   assert.match(getChatbotReply('livraison'), /3 à 5 jours/i);
   assert.match(getChatbotReply('paiement'), /carte|PayPal|Klarna/i);
 });

@@ -1,8 +1,10 @@
+import { CHECKOUT_CATALOG } from "@/lib/checkout";
+
 export const product = {
   id: "princessbloom-ceinture",
   name: "Princess Bloom — Ceinture Chauffante & Massante Menstruelle",
-  price: 89,
-  oldPrice: 119,
+  price: CHECKOUT_CATALOG["princessbloom-ceinture"].price / 100,
+  oldPrice: CHECKOUT_CATALOG["princessbloom-ceinture"].oldPrice / 100,
   description:
     "Une ceinture chauffante et massante pensée pour vous accompagner dans votre quotidien avec douceur, chaleur ciblée et confort discret.",
   features: [

@@ -471,8 +471,8 @@ body:has(.pb-product) .fixed.bottom-5.right-5 { bottom: 115px; }
 .pb-product-inner { max-width: 1240px; margin: auto; }
 .pb-hero-row { display: grid; grid-template-columns: minmax(0,1fr) 130px; gap: 20px; }
 .pb-hero { position: relative; aspect-ratio: 1.69; border-radius: 20px; overflow: hidden; }
-.pb-visual { width: 100%; height: 100%; background-image: url('/massseur/princess-product-collection.png'); background-size: 300% 200%; background-repeat: no-repeat; background-color: #f8dfde; }
-.pb-view-0 { background-position: 0 0; }.pb-view-1 { background-position: 50% 0; }.pb-view-2 { background-position: 100% 0; }.pb-view-3 { background-position: 0 100%; }.pb-view-4 { background-position: 50% 100%; }.pb-view-5 { background-position: 100% 100%; }
+.pb-visual { width: 100%; height: 100%; background-image: url('/photos/product-hero-square.webp'); background-size: contain; background-position: center; background-repeat: no-repeat; background-color: #f8dfde; }
+.pb-view-0 { background-image: url('/photos/product-hero-square.webp'); background-size: cover; }.pb-view-1 { background-image: url('/photos/product-back.webp'); }.pb-view-2 { background-image: url('/photos/product-controls.webp'); }.pb-view-3 { background-image: url('/photos/lifestyle-worn-closeup.webp'); }.pb-view-4 { background-image: url('/photos/lifestyle-reading.webp'); }.pb-view-5 { background-image: url('/photos/lifestyle-desk-three-quarter.webp'); }
 .pb-ribbon { position: absolute; top: 35px; left: -48px; transform: rotate(-43deg); width: 230px; text-align: center; padding: 9px; color: #171008; background: linear-gradient(90deg,#dfa32e,#ffe593,#d9a135); font-weight: 800; font-size: 18px; }
 .pb-benefit-icons { display: flex; flex-direction: column; justify-content: space-around; text-align: center; color: #171011; }
 .pb-benefit-icons > div { display: grid; justify-items: center; gap: 5px; }

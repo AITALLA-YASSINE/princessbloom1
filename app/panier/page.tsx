@@ -27,9 +27,10 @@ export default function CartPage() {
                 <div className="flex items-center gap-4">
                   <div className="relative h-20 w-20 overflow-hidden rounded-[1.25rem] bg-[radial-gradient(circle_at_top,#f7e7ea_0%,#efdbdd_38%,#e4c1c9_100%)]">
                     <Image
-                      src={item.image ?? "/massseur/produit1.png"}
+                      src={item.image ?? "/photos/product-hero-square.webp"}
                       alt={item.name}
                       fill
+                      sizes="80px"
                       className="object-contain p-2"
                     />
                   </div>

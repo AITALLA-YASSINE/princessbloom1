@@ -50,11 +50,11 @@ const faqPreview = [
 ];
 
 const productGallery = [
-  "/massseur/produit1.png",
-  "/massseur/produit2.png",
-  "/massseur/produit%203.png",
-  "/massseur/produit4.png",
-  "/massseur/produit5.png",
+  "/photos/lifestyle-cleaning.webp",
+  "/photos/lifestyle-park.webp",
+  "/photos/lifestyle-groceries.webp",
+  "/photos/lifestyle-cooking.webp",
+  "/photos/lifestyle-city.webp",
 ];
 
 export default function Home() {
@@ -136,7 +136,7 @@ export default function Home() {
                 <div className="hero-sparkle hero-sparkle-two" aria-hidden="true" />
                 <div className="hero-sparkle hero-sparkle-three" aria-hidden="true" />
                 <div className="hero-product-image relative h-[470px] w-full sm:h-[540px] md:h-[610px]">
-                  <Image src="/massseur/produit1.png" alt="Princess Bloom produit" fill className="object-contain" sizes="(max-width: 1023px) 92vw, 620px" priority />
+                  <Image src="/photos/product-hero-square.webp" alt="Princess Bloom produit" fill className="object-cover" sizes="(max-width: 1023px) 92vw, 620px" priority />
                 </div>
               </div>
             </div>
@@ -177,7 +177,7 @@ export default function Home() {
 
           <div className="overflow-hidden rounded-[2rem] border border-[#493238]/10 bg-[#fffaf8] p-2 shadow-[0_20px_40px_rgba(73,50,56,0.08)]">
             <div className="relative h-full min-h-[320px] overflow-hidden rounded-[1.5rem] bg-[#f8efe9]">
-              <Image src="/massseur/produit1.png" alt="Visuel Princess Bloom lifestyle" fill className="object-contain p-4" />
+              <Image src="/photos/lifestyle-desk-three-quarter.webp" alt="Visuel Princess Bloom lifestyle" fill sizes="(min-width: 1024px) 480px, 90vw" className="object-cover p-4" />
             </div>
           </div>
         </div>
@@ -193,7 +193,7 @@ export default function Home() {
           {productGallery.map((src, index) => (
             <div key={src} className="overflow-hidden rounded-[1.8rem] border border-[#493238]/10 bg-[#fffaf8] p-2 shadow-[0_20px_40px_rgba(73,50,56,0.08)]">
               <div className="relative h-[280px] overflow-hidden rounded-[1.3rem] bg-[#f8efe9]">
-                <Image src={src} alt={`Produit Princess Bloom ${index + 1}`} fill className="object-contain p-3" />
+                <Image src={src} alt={`Produit Princess Bloom ${index + 1}`} fill sizes="(min-width: 1280px) 200px, (min-width: 768px) 45vw, 90vw" className="object-cover p-3" style={{ objectPosition: index === 0 ? "62% center" : index === 1 ? "57% center" : index === 4 ? "55% center" : "center" }} />
               </div>
             </div>
           ))}
@@ -247,8 +247,8 @@ export default function Home() {
             <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#b77b8c]">Offre</p>
             <h2 className="mt-4 text-4xl text-[#493238]">Princess Bloom — un confort discret, à chaque journée.</h2>
             <div className="mt-5 flex items-center gap-3 text-[#493238]">
-              <span className="text-4xl font-semibold">89,00 €</span>
-              <span className="text-lg text-[#493238]/40 line-through">119,00 €</span>
+              <span className="text-4xl font-semibold">{product.price.toFixed(2).replace(".", ",")} €</span>
+              <span className="text-lg text-[#493238]/40 line-through">{product.oldPrice.toFixed(2).replace(".", ",")} €</span>
             </div>
             <ul className="mt-6 space-y-2 text-sm leading-7 text-[#493238]/75">
               <li>• Ceinture chauffante et massante</li>

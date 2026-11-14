@@ -40,7 +40,7 @@ export function CartDrawer() {
           <div className="cart-drawer-success" role="status"><span><Check /></span>Produit ajouté à votre panier !</div>
           <div className="cart-drawer-items">
             {cart.map(item => <article key={item.id} className="cart-drawer-item">
-              <div className="cart-drawer-image"><Image src={item.image ?? "/massseur/produit1.png"} alt={item.name} fill sizes="112px" className="object-cover" /></div>
+              <div className="cart-drawer-image"><Image src={item.image ?? "/photos/product-hero-square.webp"} alt={item.name} fill sizes="112px" className="object-cover" /></div>
               <div className="cart-drawer-item-info"><h3>{item.id.endsWith("-pack") ? "Pack Bien-être Complet Princess Bloom" : "Ceinture chauffante et massante Princess Bloom"}</h3><p>{euros(item.price)}</p>
                 <div className="cart-drawer-item-actions"><div className="cart-drawer-quantity"><button type="button" aria-label={`Diminuer la quantité de ${item.name}`} onClick={() => updateQuantity(item.id, item.quantity - 1)}><Minus /></button><span aria-label="Quantité" aria-live="polite">{item.quantity}</span><button type="button" aria-label={`Augmenter la quantité de ${item.name}`} onClick={() => updateQuantity(item.id, item.quantity + 1)}><Plus /></button></div><button type="button" className="cart-drawer-remove" aria-label={`Supprimer ${item.name}`} onClick={() => removeFromCart(item.id)}><Trash2 /></button></div>
               </div>

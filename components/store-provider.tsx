@@ -1,5 +1,6 @@
 "use client";
 
+import { CHECKOUT_CATALOG } from "@/lib/checkout";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 export type CartItem = {
@@ -47,7 +48,10 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
     /* eslint-disable react-hooks/set-state-in-effect */
     try {
       const storedCart = localStorage.getItem(CART_KEY);
-      if (storedCart) setCart(JSON.parse(storedCart));
+      if (storedCart) setCart(JSON.parse(storedCart).map((item: CartItem) => {
+        const entry = CHECKOUT_CATALOG[item.id as keyof typeof CHECKOUT_CATALOG];
+        return entry ? { ...item, price: entry.price / 100, image: "/photos/product-hero-square.webp" } : item;
+      }));
     } catch { /* Keep an empty cart if storage is unavailable or invalid. */ }
     try {
       const storedOrder = localStorage.getItem(ORDER_KEY);
@@ -97,7 +101,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
   };
 
   const subtotal = useMemo(
-    () => cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+    () => cart.reduce((sum, item) => sum + Math.round(item.price * 100) * item.quantity, 0) / 100,
     [cart],
   );
 

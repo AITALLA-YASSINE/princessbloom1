@@ -1,0 +1,117 @@
+[
+  {
+    "original": "public/file.svg",
+    "backup": "SAUVEGARDE_ANCIENNES_PHOTOS/public/file.svg",
+    "sha256": "2b67812c325c199a02536cdbeea0c593a72f707d323b72ee3e08dbab06753bd4"
+  },
+  {
+    "original": "public/globe.svg",
+    "backup": "SAUVEGARDE_ANCIENNES_PHOTOS/public/globe.svg",
+    "sha256": "b614b9bf183925957661ac851498fe1d8029fd43a62fbfed86f9e2624a57e7cf"
+  },
+  {
+    "original": "public/next.svg",
+    "backup": "SAUVEGARDE_ANCIENNES_PHOTOS/public/next.svg",
+    "sha256": "55995dfad6ecb4945a1e856ddca03c5e16aa5bf13fd21b4df6a74ae79357bcfc"
+  },
+  {
+    "original": "public/vercel.svg",
+    "backup": "SAUVEGARDE_ANCIENNES_PHOTOS/public/vercel.svg",
+    "sha256": "f081337b2fee635b455b63275406a3e7f39d6a014e25ad90dab5a67e62a12ac4"
+  },
+  {
+    "original": "public/window.svg",
+    "backup": "SAUVEGARDE_ANCIENNES_PHOTOS/public/window.svg",
+    "sha256": "644768c4aaeb4767bce293344eeb0c125fb804a94d801440424072202d85e3a1"
+  },
+  {
+    "original": "public/massseur/b7151afc-170b-4968-a27ddddddd-4444a5cbdd10.png",
+    "backup": "SAUVEGARDE_ANCIENNES_PHOTOS/public/massseur/b7151afc-170b-4968-a27ddddddd-4444a5cbdd10.png",
+    "sha256": "136a02dc17d89d9b1f989599e1f277626c4918660d675eeaa0cd96a00a420018"
+  },
+  {
+    "original": "public/massseur/bouillon.png",
+    "backup": "SAUVEGARDE_ANCIENNES_PHOTOS/public/massseur/bouillon.png",
+    "sha256": "229269798c2b7c3bbf582c1985b9c1f300b63fec4aa85973ff62f8266afa2e45"
+  },
+  {
+    "original": "public/massseur/cherry-blossoms.png",
+    "backup": "SAUVEGARDE_ANCIENNES_PHOTOS/public/massseur/cherry-blossoms.png",
+    "sha256": "c62b1832e86fcb1e56b38f5b0a2c4903af69b1a162b82c61d0f78d0957da9be4"
+  },
+  {
+    "original": "public/massseur/logo.png",
+    "backup": "SAUVEGARDE_ANCIENNES_PHOTOS/public/massseur/logo.png",
+    "sha256": "83470e8d1f0261fe681dd9c5ec10016a7a77b3726d3b875d833403a54f0de6bc"
+  },
+  {
+    "original": "public/massseur/logovrai.png",
+    "backup": "SAUVEGARDE_ANCIENNES_PHOTOS/public/massseur/logovrai.png",
+    "sha256": "ee37df5be712c93ffdc3b6a389adf948bb0b0daf674f5b1f7dfb52ec042665e4"
+  },
+  {
+    "original": "public/massseur/princess-product-collection.png",
+    "backup": "SAUVEGARDE_ANCIENNES_PHOTOS/public/massseur/princess-product-collection.png",
+    "sha256": "18fd8c6d59d9627027c7bfab41fb272b8a7fe7ee1477f11d76ad6e345bdbbdaf"
+  },
+  {
+    "original": "public/massseur/produit 3.png",
+    "backup": "SAUVEGARDE_ANCIENNES_PHOTOS/public/massseur/produit 3.png",
+    "sha256": "4362c7d8e716e3d71b598f0fe2e038d158a191f07b56516ca76221bfef191b7e"
+  },
+  {
+    "original": "public/massseur/produit.png",
+    "backup": "SAUVEGARDE_ANCIENNES_PHOTOS/public/massseur/produit.png",
+    "sha256": "e40c6ef7fb76d3da6df2dce2d844bba030e977df79ccfd8b29c946cb96bf60b7"
+  },
+  {
+    "original": "public/massseur/produit1.png",
+    "backup": "SAUVEGARDE_ANCIENNES_PHOTOS/public/massseur/produit1.png",
+    "sha256": "4d4b827eb115755cb89f1f7433e55e0cf4c2e06f24642c61ae910bae4e799601"
+  },
+  {
+    "original": "public/massseur/produit2.png",
+    "backup": "SAUVEGARDE_ANCIENNES_PHOTOS/public/massseur/produit2.png",
+    "sha256": "33f7f37f3c296f7034962d7d965c9115dceb10ac7c5ec5b205f37f8c5ab4565a"
+  },
+  {
+    "original": "public/massseur/produit4.png",
+    "backup": "SAUVEGARDE_ANCIENNES_PHOTOS/public/massseur/produit4.png",
+    "sha256": "252c8708931ca39f1d01d67e31a841b1172362469710e3c6f6a9f65dee0e32e3"
+  },
+  {
+    "original": "public/massseur/produit5.png",
+    "backup": "SAUVEGARDE_ANCIENNES_PHOTOS/public/massseur/produit5.png",
+    "sha256": "0a37fc636e0ee969a519dfb22822a25abbe26169955d26218d8475b18f577567"
+  },
+  {
+    "original": "public/massseur/Saddddns titre.png",
+    "backup": "SAUVEGARDE_ANCIENNES_PHOTOS/public/massseur/Saddddns titre.png",
+    "sha256": "3ac87e381859465229ab71ed56ccadaf53029675dbffc432c11ed3323d67ff46"
+  },
+  {
+    "original": "public/massseur/Sans tddditre.png",
+    "backup": "SAUVEGARDE_ANCIENNES_PHOTOS/public/massseur/Sans tddditre.png",
+    "sha256": "98b9b35877d9f6a98a4778bee1a45393920b4c602fb0eefd5b3b7ed7d57dfd27"
+  },
+  {
+    "original": "public/massseur/Sans titre.png",
+    "backup": "SAUVEGARDE_ANCIENNES_PHOTOS/public/massseur/Sans titre.png",
+    "sha256": "3da641c27ddbf5ca9a403939b77ca42393bf4f85170369df1c79a6563fd61c55"
+  },
+  {
+    "original": "public/massseur/Sansddd titre.png",
+    "backup": "SAUVEGARDE_ANCIENNES_PHOTOS/public/massseur/Sansddd titre.png",
+    "sha256": "33019f979743e6b35e02b72afdf0837955ba5738ead3d174d055086fe358c43a"
+  },
+  {
+    "original": "public/massseur/unnamed.jpg",
+    "backup": "SAUVEGARDE_ANCIENNES_PHOTOS/public/massseur/unnamed.jpg",
+    "sha256": "d6a64cd459606c499b131eeaef2966d99efe31635cd17f11d6160942cec65b07"
+  },
+  {
+    "original": "app/favicon.ico",
+    "backup": "SAUVEGARDE_ANCIENNES_PHOTOS/app/favicon.ico",
+    "sha256": "c28fdd2a4f31e2dc64f653962286da5c82a4cdfc518b242d32812c624e9a19a4"
+  }
+]
