@@ -19,3 +19,6 @@
   .pb-gallery .pb-gallery-arrow svg { width: 19px; height: 19px; }
 }
 @media (prefers-reduced-motion: reduce) { .pb-gallery .pb-hero > .pb-visual { animation: none; } }
+
+/* Replace only the third product photo; retain the full comparison framing. */
+.pb-gallery .pb-view-2 { background-image: url("/photos/comparison-real-belt-v2.webp"); background-size: contain; background-position: center; }

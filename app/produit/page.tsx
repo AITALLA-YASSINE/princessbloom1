@@ -7,7 +7,7 @@ import { ArrowRight, Check, ChevronLeft, ChevronRight, CircleHelp, Feather, Flow
 import { useStore } from "@/components/store-provider";
 import { product } from "@/lib/site-data";
 
-const views = ["La ceinture Princess Bloom sur un satin rose", "La sangle ajustable et sa boucle", "Le réglage de la chaleur", "La ceinture portée au quotidien", "La ceinture pendant un moment de lecture"];
+const views = ["La ceinture Princess Bloom sur un satin rose", "La sangle ajustable et sa boucle", "Comparaison bouillotte et ceinture Princess Bloom", "La ceinture portée au quotidien", "La ceinture pendant un moment de lecture"];
 const questions = [
   { question: "Elle chauffe jusqu’à combien ?", answer: "La chaleur se règle sur 5 niveaux. Consultez la notice pour les températures exactes et commencez toujours par le niveau le plus doux." },
   { question: "Est-ce sans fil ?", answer: "Oui, la ceinture s’utilise sans fil après recharge avec son câble USB." },
