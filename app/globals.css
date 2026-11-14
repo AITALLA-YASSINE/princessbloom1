@@ -592,3 +592,10 @@ body:has(> .pb-header[data-checkout="true"]) > header,body:has(> .pb-header[data
 .pb-header-actions { justify-self: end; }
 .pb-header button:focus-visible,.pb-header a:focus-visible { outline: 2px solid #a54b70; outline-offset: 3px; }
 .pb-mobile-nav a { width: fit-content; }
+
+/* Photographs sit directly in the layout, without inset frames. */
+.homepage-shell .product-card { padding: 0; border: 0; background: transparent; box-shadow: none; }
+.homepage-shell .product-card > div { background: transparent; }
+.homepage-shell .product-card > div::after { content: none; }
+.homepage-shell .hero-product-image { aspect-ratio: 1; }
+.pb-visual { background-color: transparent; }

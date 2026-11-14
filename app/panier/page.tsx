@@ -25,13 +25,13 @@ export default function CartPage() {
             {cart.map((item) => (
               <div key={item.id} className="flex flex-col gap-4 rounded-[1.75rem] border border-[#493238]/10 bg-[#fffaf8] p-5 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-4">
-                  <div className="relative h-20 w-20 overflow-hidden rounded-[1.25rem] bg-[radial-gradient(circle_at_top,#f7e7ea_0%,#efdbdd_38%,#e4c1c9_100%)]">
+                  <div className="relative h-20 w-20 overflow-hidden rounded-[1.25rem]">
                     <Image
                       src={item.image ?? "/photos/product-hero-square.webp"}
                       alt={item.name}
                       fill
                       sizes="80px"
-                      className="object-contain p-2"
+                      className="object-contain"
                     />
                   </div>
                   <div>

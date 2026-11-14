@@ -136,7 +136,7 @@ export default function Home() {
                 <div className="hero-sparkle hero-sparkle-two" aria-hidden="true" />
                 <div className="hero-sparkle hero-sparkle-three" aria-hidden="true" />
                 <div className="hero-product-image relative h-[470px] w-full sm:h-[540px] md:h-[610px]">
-                  <Image src="/photos/product-hero-square.webp" alt="Princess Bloom produit" fill className="object-cover" sizes="(max-width: 1023px) 92vw, 620px" priority />
+                  <Image src="/photos/product-hero-square.webp" alt="Princess Bloom produit" fill className="object-contain" sizes="(max-width: 1023px) 92vw, 620px" priority />
                 </div>
               </div>
             </div>
@@ -175,9 +175,9 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="overflow-hidden rounded-[2rem] border border-[#493238]/10 bg-[#fffaf8] p-2 shadow-[0_20px_40px_rgba(73,50,56,0.08)]">
-            <div className="relative h-full min-h-[320px] overflow-hidden rounded-[1.5rem] bg-[#f8efe9]">
-              <Image src="/photos/lifestyle-desk-three-quarter.webp" alt="Visuel Princess Bloom lifestyle" fill sizes="(min-width: 1024px) 480px, 90vw" className="object-cover p-4" />
+          <div className="overflow-hidden rounded-[2rem]">
+            <div className="relative aspect-[3/2] self-center overflow-hidden rounded-[1.5rem]">
+              <Image src="/photos/lifestyle-desk-three-quarter.webp" alt="Visuel Princess Bloom lifestyle" fill sizes="(min-width: 1024px) 480px, 90vw" className="object-contain" />
             </div>
           </div>
         </div>
@@ -191,9 +191,9 @@ export default function Home() {
 
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
           {productGallery.map((src, index) => (
-            <div key={src} className="overflow-hidden rounded-[1.8rem] border border-[#493238]/10 bg-[#fffaf8] p-2 shadow-[0_20px_40px_rgba(73,50,56,0.08)]">
-              <div className="relative h-[280px] overflow-hidden rounded-[1.3rem] bg-[#f8efe9]">
-                <Image src={src} alt={`Produit Princess Bloom ${index + 1}`} fill sizes="(min-width: 1280px) 200px, (min-width: 768px) 45vw, 90vw" className="object-cover p-3" style={{ objectPosition: index === 0 ? "62% center" : index === 1 ? "57% center" : index === 4 ? "55% center" : "center" }} />
+            <div key={src} className="overflow-hidden rounded-[1.8rem]">
+              <div className="relative aspect-[3/2] overflow-hidden rounded-[1.3rem]">
+                <Image src={src} alt={`Produit Princess Bloom ${index + 1}`} fill sizes="(min-width: 1280px) 200px, (min-width: 768px) 45vw, 90vw" className="object-contain" />
               </div>
             </div>
           ))}
@@ -256,8 +256,8 @@ export default function Home() {
               <li>• Livraison standard offerte dès 60 €</li>
             </ul>
           </div>
-          <div className="rounded-[1.75rem] bg-white p-6 shadow-[0_20px_35px_rgba(73,50,56,0.08)]">
-            <ProductArt className="mx-auto max-w-[260px]" />
+          <div className="rounded-[1.75rem]">
+            <ProductArt className="mx-auto max-w-[420px]" />
             <Link href="/produit" className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#493238] px-6 py-3 text-sm font-medium text-white">
               Ajouter au panier <ArrowRight className="h-4 w-4" />
             </Link>

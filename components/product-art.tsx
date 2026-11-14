@@ -2,14 +2,14 @@ import Image from "next/image";
 
 export function ProductArt({ className = "" }: { className?: string }) {
   return (
-    <div className={`relative mx-auto aspect-[4/5] w-full max-w-[420px] overflow-hidden rounded-[2.2rem] bg-[radial-gradient(circle_at_top,#f7e7ea_0%,#efdbdd_38%,#e4c1c9_100%)] shadow-[0_32px_90px_rgba(73,50,56,0.18)] ${className}`}>
+    <div className={`relative mx-auto aspect-square w-full max-w-[420px] overflow-hidden rounded-[2.2rem] ${className}`}>
       <Image
         src="/photos/product-hero-square.webp"
         alt="Princess Bloom produit principal"
         fill
         sizes="(min-width: 1024px) 420px, 90vw"
         priority
-        className="object-cover p-3 md:p-5"
+        className="object-contain"
       />
     </div>
   );

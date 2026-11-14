@@ -33,8 +33,9 @@ export default function ProductPage() {
     <main className="pb-product">
       <div className="pb-product-inner">
         <section className="pb-gallery" aria-label="Photos du produit" aria-roledescription="carrousel" onKeyDown={event => { if (event.key === "ArrowLeft" || event.key === "ArrowRight") { event.preventDefault(); changeImage(event.key === "ArrowRight" ? 1 : -1); } }}>
+          <div className="pb-gallery-label"><span className="pb-bestseller">Best-seller</span></div>
           <div className="pb-hero-row">
-            <div className="pb-hero"><ProductVisual key={activeImage} view={activeImage} /><span className="pb-ribbon">BEST-SELLER 🔥</span></div>
+            <div className={`pb-hero pb-hero-view-${activeImage}`}><ProductVisual key={activeImage} view={activeImage} /></div>
             <div className="pb-benefit-icons">
               <div><span><Waves /></span><strong>Chaleur<br />personnalisable</strong></div>
               <div><span><Flower2 /></span><strong>Massage<br />relaxant</strong></div>
