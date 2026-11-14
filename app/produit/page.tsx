@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import "./carousel.css";
 import Link from "next/link";
-import { ArrowRight, Check, CircleHelp, Feather, Flower2, LockKeyhole, ShoppingBag, Sparkles, Star, Truck, UserRound, Waves } from "lucide-react";
+import { ArrowRight, Check, ChevronLeft, ChevronRight, CircleHelp, Feather, Flower2, LockKeyhole, ShoppingBag, Sparkles, Star, Truck, UserRound, Waves } from "lucide-react";
 import { useStore } from "@/components/store-provider";
 import { product } from "@/lib/site-data";
 
@@ -22,22 +23,29 @@ export default function ProductPage() {
   const [activeImage, setActiveImage] = useState(0);
   const [openQuestion, setOpenQuestion] = useState<number | null>(null);
   const price = product.price;
+  function changeImage(direction: number) {
+    setActiveImage(current => (current + direction + views.length) % views.length);
+  }
   function handleAddToCart() {
     addToCart({ id: product.id, name: product.name, price, quantity: 1, image: "/photos/product-hero-square.webp" });
   }
   return (
     <main className="pb-product">
       <div className="pb-product-inner">
-        <section className="pb-gallery" aria-label="Photos du produit">
+        <section className="pb-gallery" aria-label="Photos du produit" aria-roledescription="carrousel" onKeyDown={event => { if (event.key === "ArrowLeft" || event.key === "ArrowRight") { event.preventDefault(); changeImage(event.key === "ArrowRight" ? 1 : -1); } }}>
           <div className="pb-hero-row">
-            <div className="pb-hero"><ProductVisual view={activeImage} /><span className="pb-ribbon">BEST-SELLER 🔥</span></div>
+            <div className="pb-hero"><ProductVisual key={activeImage} view={activeImage} /><span className="pb-ribbon">BEST-SELLER 🔥</span></div>
             <div className="pb-benefit-icons">
               <div><span><Waves /></span><strong>Chaleur<br />personnalisable</strong></div>
               <div><span><Flower2 /></span><strong>Massage<br />relaxant</strong></div>
               <div><span><Feather /></span><strong>Discrétion<br />au quotidien</strong></div>
             </div>
           </div>
-          <div className="pb-thumbnails">{views.map((label, index) => <button key={label} onClick={() => setActiveImage(index)} aria-label={label} aria-pressed={activeImage === index} className={activeImage === index ? "is-active" : ""}><ProductVisual view={index} /></button>)}</div>
+          <div className="pb-gallery-controls">
+            <button type="button" className="pb-gallery-arrow" aria-label="Photo précédente" onClick={() => changeImage(-1)}><ChevronLeft /></button>
+            <div className="pb-thumbnails">{views.map((label, index) => <button key={label} type="button" onClick={() => setActiveImage(index)} aria-label={label} aria-pressed={activeImage === index} className={activeImage === index ? "is-active" : ""}><ProductVisual view={index} /></button>)}</div>
+            <button type="button" className="pb-gallery-arrow" aria-label="Photo suivante" onClick={() => changeImage(1)}><ChevronRight /></button>
+          </div>
         </section>
         <section className="pb-details" aria-label="Choisir votre ceinture">
           <div className="pb-reviews"><Link href="/avis" className="pb-rating"><span>{Array.from({ length: 5 }, (_, i) => <Star key={i} />)}</span><span><b>4,9/5</b> (1 327 avis vérifiés)</span></Link><span className="pb-community"><UserRound /><b>+2 500 femmes soulagées</b></span></div>
