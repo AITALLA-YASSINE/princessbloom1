@@ -223,7 +223,7 @@ export function ReferenceHome() {
         <article><span className={s.cardNumber}>02</span><ThermometerSun strokeWidth={1.2} /><h3>Rechercher la chaleur</h3><p>Une chaleur douce sur le ventre peut aider à soulager l’inconfort. Choisissez une température agréable et adaptée.</p></article>
         <article><span className={s.cardNumber}>03</span><Waves strokeWidth={1.2} /><h3>S’accorder une pause</h3><p>Les vibrations de la ceinture sont proposées comme une sensation de massage et de détente. Le confort ressenti varie d’une personne à l’autre.</p></article>
       </div>
-      <div className={s.educationFoot}><a href="https://www.ameli.fr/assure/sante/themes/regles-douloureuses/que-faire-quand-consulter" target="_blank" rel="noopener noreferrer">En savoir plus avec l’Assurance Maladie <ArrowRight size={15} /></a><p>En cas de douleurs inhabituelles, sévères ou persistantes, consultez un professionnel de santé. La ceinture est un accessoire de confort.</p></div>
+      <div className={s.educationFoot}><a href="https://www.ameli.fr/assure/sante/themes/regles-douloureuses/que-faire-quand-consulter" target="_blank" rel="noopener noreferrer">En savoir plus avec l’Assurance Maladie <ArrowRight size={15} /></a></div>
     </section>
 
     <section className={`${s.section} ${s.productSection}`} id="rituel" aria-labelledby="rituel-title">
