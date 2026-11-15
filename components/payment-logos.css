@@ -1,0 +1,5 @@
+.pb-payment-badges { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:9px; margin:18px auto 0; max-width:560px; }
+.pb-payment-badge { display:block; flex:0 0 60px; width:60px; height:38px; }
+.pb-payment-badge>img { display:block; width:60px; height:38px; object-fit:contain; }
+.pbh-footer>.pb-payment-badges { margin-top:30px; }
+@media(max-width:599px) { .pb-payment-badges { max-width:280px; gap:10px; margin-top:15px; }.pbh-footer>.pb-payment-badges { margin-top:25px; } }

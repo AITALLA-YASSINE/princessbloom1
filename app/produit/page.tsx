@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowRight, Check, ChevronLeft, ChevronRight, CircleHelp, Feather, Flower2, LockKeyhole, ShoppingBag, Sparkles, Star, Truck, UserRound, Waves } from "lucide-react";
 import { useStore } from "@/components/store-provider";
 import { product } from "@/lib/site-data";
+import { PaymentLogos } from "@/components/payment-logos";
 
 const views = ["La ceinture Princess Bloom sur un satin rose", "La sangle ajustable et sa boucle", "Comparaison bouillotte et ceinture Princess Bloom", "La ceinture portée au quotidien", "La ceinture pendant un moment de lecture"];
 const questions = [
@@ -54,7 +55,7 @@ export default function ProductPage() {
           <div className="pb-price"><strong>{price.toFixed(2).replace(".", ",")} €</strong><del>{product.oldPrice.toFixed(2).replace(".", ",")} €</del><span>-{Math.round((1 - price / product.oldPrice) * 100)} %</span></div>
           <ul className="pb-features">{["Soulage efficacement les douleurs de règles", "Chaleur douce et réglable (5 niveaux)", "Massage relaxant (4 modes de vibration)", "Confortable, légère et discrète"].map(text => <li key={text}><Check />{text}</li>)}</ul>
           <button className="pb-add" onClick={handleAddToCart}><ShoppingBag />Ajouter au panier<ArrowRight /></button>
-          <div className="pb-payment"><strong><LockKeyhole /> Paiement sécurisé</strong><div className="pb-payment-logos" aria-label="Moyens de paiement"><span className="pb-amex">AMEX</span><span className="pb-apple"> Pay</span><span className="pb-google"><i>G</i> Pay</span><span className="pb-mastercard"><i /><i /></span><span className="pb-paypal">P</span><span className="pb-klarna">Klarna</span><span className="pb-visa">VISA</span></div></div>
+          <div className="pb-payment"><strong><LockKeyhole /> Paiement sécurisé</strong><PaymentLogos /></div>
           <section className="pb-questions"><h2><Sparkles />Une question sur cette ceinture ?</h2><div className="pb-question-grid">{questions.map(({question, answer}, i) => <div key={question}><button aria-expanded={openQuestion === i} aria-controls={`answer-${i}`} onClick={() => setOpenQuestion(openQuestion === i ? null : i)}><CircleHelp />{question}</button>{openQuestion === i && <p id={`answer-${i}`}>{answer}</p>}</div>)}</div></section>
           <Link className="pb-shipping" href="/livraison"><Truck /><span><strong>Livraison en 5 à 10 jours ouvrés · Livraison offerte</strong><small>Préparée et expédiée sous 48 h, avec un suivi de commande.</small></span></Link>
         </section>
