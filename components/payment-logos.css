@@ -1,5 +1,6 @@
-.pb-payment-badges { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:9px; margin:18px auto 0; max-width:560px; }
-.pb-payment-badge { display:block; flex:0 0 60px; width:60px; height:38px; }
-.pb-payment-badge>img { display:block; width:60px; height:38px; object-fit:contain; }
+.pb-payment-badges { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); align-items:center; justify-content:center; gap:8px; width:min(100%,356px); margin:18px auto 0; }
+.pb-payment-badge { display:block; width:100%; min-width:0; aspect-ratio:38 / 24; }
+.pb-payment-badge>img { display:block; width:100%; height:100%; object-fit:contain; }
+.pb-payment-badge-paypal>img { padding:3px; border:1px solid #e6e3e5; border-radius:4px; background:#fff; }
 .pbh-footer>.pb-payment-badges { margin-top:30px; }
-@media(max-width:599px) { .pb-payment-badges { max-width:280px; gap:10px; margin-top:15px; }.pbh-footer>.pb-payment-badges { margin-top:25px; } }
+@media(max-width:599px) { .pb-payment-badges { width:min(100%,302px); gap:6px; margin-top:15px; }.pbh-footer>.pb-payment-badges { margin-top:25px; } }
