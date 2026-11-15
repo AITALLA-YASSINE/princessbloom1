@@ -92,4 +92,15 @@ body:has(.pbh-home[data-home-reference="active"]) > footer { display:none; }
   .pbh-footer { padding:40px 22px 23px; }.pbh-footerTop { grid-template-columns:1fr 1fr; gap:30px 20px; }.pbh-footerBrand { grid-column:span 2; text-align:center; margin-bottom:5px; }.pbh-footerBrand>img { margin:auto; width:165px; }.pbh-footerBrand>svg { margin:15px auto 0; }.pbh-footerTop h2 { font-size:9px; margin-bottom:17px; }.pbh-footerTop>div>a { font-size:11px; }.pbh-footerBottom { font-size:9px; gap:10px; margin-top:30px; }
 }
 @media(max-width:360px) { .pbh-hero { height:550px; padding-inline:15px; }.pbh-heroCopy h1 { font-size:42px; }.pbh-heroCopy>p { font-size:10px; }.pbh-heroCopy>.pbh-primary { padding-inline:12px; font-size:10px; }.pbh-heroSecondary { font-size:8px; }.pbh-floatingProduct { gap:9px; padding:11px; }.pbh-floatingProduct>img { width:67px; height:75px; }.pbh-floatingProduct h2 { font-size:12px; }.pbh-neutralProof { font-size:8px; gap:5px; }.pbh-home h2 { font-size:36px; }.pbh-buyRow>.pbh-primary { font-size:10px; }.pbh-thumbnails button { width:48px; height:48px; } }
-@media(prefers-reduced-motion:reduce) { .pbh-home *,.pbh-home *::before,.pbh-home *::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; }.pbh-primary:hover,.pbh-secondary:hover,.pbh-lifestyleGrid figure:hover img { transform:none; } }
+.pbh-promo,.pbh-reassurance { display:block; overflow:hidden; padding:0; }
+.pbh-marqueeTrack { display:flex; width:max-content; animation:pbhMarqueeRight 38s linear infinite; will-change:transform; }
+.pbh-marqueeGroup { display:flex; align-items:center; justify-content:space-around; flex:0 0 auto; min-width:100vw; gap:46px; padding-inline:23px; box-sizing:border-box; }
+.pbh-promoGroup { min-height:38px; }
+.pbh-promoItem { display:inline-flex; align-items:center; gap:7px; white-space:nowrap; flex:none; }
+.pbh-reassuranceGroup { padding-block:24px; }
+.pbh-reassuranceGroup>a,.pbh-reassuranceGroup>span { display:inline-flex; align-items:center; gap:9px; font-size:10px; letter-spacing:.03em; white-space:nowrap; flex:none; }
+.pbh-promoTrack { animation-duration:32s; }
+.pbh-promo:hover .pbh-marqueeTrack,.pbh-reassurance:hover .pbh-marqueeTrack,.pbh-reassurance:focus-within .pbh-marqueeTrack { animation-play-state:paused; }
+@keyframes pbhMarqueeRight { from { transform:translateX(-50%); } to { transform:translateX(0); } }
+@media(max-width:650px) { .pbh-promoGroup { min-height:30px; }.pbh-promoItem { gap:4px; }.pbh-marqueeGroup { gap:32px; padding-inline:16px; }.pbh-reassuranceGroup { padding-block:19px; }.pbh-reassuranceGroup>a,.pbh-reassuranceGroup>span { font-size:9px; } }
+@media(prefers-reduced-motion:reduce) { .pbh-home *,.pbh-home *::before,.pbh-home *::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; }.pbh-primary:hover,.pbh-secondary:hover,.pbh-lifestyleGrid figure:hover img { transform:none; }.pbh-marqueeTrack { width:100%; transform:none; will-change:auto; }.pbh-marqueeGroup[aria-hidden=true],.pbh-promoItem[aria-hidden=true] { display:none; }.pbh-marqueeGroup { width:100%; min-width:0; flex-wrap:wrap; gap:18px; padding:15px; } }

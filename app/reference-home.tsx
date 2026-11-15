@@ -181,7 +181,7 @@ export function ReferenceHome() {
   return <main className={s.home} data-home-reference={pathname === "/" ? "active" : undefined}>
     <a href="#accueil-contenu" className={s.skipLink}>Aller au contenu</a>
     <div className={s.heroWorld}>
-      {showPromo && <div className={s.promo}>CODE <strong>PRINCESSBLOOM5</strong><span> · </span>−5 % sur votre commande<Heart size={12} aria-hidden="true" /></div>}
+      {showPromo && <div className={s.promo}><div className="pbh-marqueeTrack pbh-promoTrack">{[0, 1].map(copy => <div className="pbh-marqueeGroup pbh-promoGroup" key={copy} aria-hidden={copy === 1 ? true : undefined}>{[0, 1, 2].map(item => <span className="pbh-promoItem" key={item} aria-hidden={item > 0 ? true : undefined}>CODE <strong>PRINCESSBLOOM5</strong><span> · </span>−5 % sur votre commande<Heart size={12} aria-hidden="true" /></span>)}</div>)}</div></div>}
       <header className={s.header} onKeyDown={event => { if (event.key === "Escape") closeMenu(); }}>
         <div className={s.headerInner}>
           <button ref={menuRef} type="button" className={s.menuButton} onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"} aria-expanded={menuOpen} aria-controls="home-navigation">{menuOpen ? <X /> : <Menu />}</button>
@@ -204,7 +204,7 @@ export function ReferenceHome() {
       </div>
     </div>
 
-    <section className={s.reassurance} aria-label="Les engagements Princess Bloom"><span><LockKeyhole />Paiement sécurisé</span><span><Truck />Livraison offerte à la commande</span><Link href="/suivi"><MoveHorizontal />Suivi de commande</Link><Link href="/retours"><RotateCcw />Conditions de retour</Link><Link href="/contact"><MessageCircle />À votre écoute</Link></section>
+    <section className={s.reassurance} aria-label="Les engagements Princess Bloom"><div className="pbh-marqueeTrack pbh-reassuranceTrack">{[0, 1].map(copy => <div className="pbh-marqueeGroup pbh-reassuranceGroup" key={copy} aria-hidden={copy === 1 ? true : undefined} inert={copy === 1 ? true : undefined}><span><LockKeyhole />Paiement sécurisé</span><span><Truck />Livraison offerte à la commande</span><Link href="/suivi"><MoveHorizontal />Suivi de commande</Link><Link href="/retours"><RotateCcw />Conditions de retour</Link><Link href="/contact"><MessageCircle />À votre écoute</Link></div>)}</div></section>
 
     <section className={`${s.section} ${s.education}`} id="comprendre" aria-labelledby="education-title">
       <div className={s.sectionHeading}><span className={s.eyebrow}>Se comprendre. Prendre soin de soi.</span><h2 id="education-title">Vos règles ne devraient pas décider<br className={s.desktopBreak} /> du rythme de vos <em>journées.</em></h2><p>Comprendre son corps, c’est aussi apprendre à mieux prendre soin de soi.</p></div>
