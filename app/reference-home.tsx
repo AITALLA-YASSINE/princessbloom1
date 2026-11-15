@@ -155,7 +155,6 @@ function TrustpilotSummary() {
   return <div className="pbh-trustpilotPreview" aria-label="4,9 sur 5, plus de 2 000 femmes soulagées">
     <div className="pbh-trustpilotIdentity" aria-hidden="true">
       <Image src="/brand/trustpilot-stars-5.svg" alt="" width={100} height={19} unoptimized />
-      <span className="pbh-trustpilotName">Trustpilot</span>
     </div>
     <span className="pbh-trustpilotRating"><strong>4,9 / 5</strong><span>+ de 2 000 femmes soulagées</span></span>
   </div>;

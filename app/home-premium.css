@@ -126,7 +126,6 @@ body:has(.pbh-home[data-home-reference="active"]) > footer { display:none; }
 .pbh-trustpilotPreview { display:flex; flex-direction:column; align-items:flex-start; gap:5px; width:fit-content; max-width:100%; margin-top:12px; }
 .pbh-trustpilotIdentity { display:flex; align-items:center; gap:10px; }
 .pbh-trustpilotIdentity img { display:block; height:auto; flex:none; }
-.pbh-trustpilotName { color:#191919; font-size:15px; font-weight:600; line-height:1.4; letter-spacing:-.04em; }
 .pbh-trustpilotRating { display:flex; align-items:center; flex-wrap:wrap; gap:4px 8px; font-size:9px; color:#620f30; line-height:1.5; }
 .pbh-trustpilotRating strong { font-weight:650; white-space:nowrap; }
 .pbh-trustpilotRating>span { white-space:nowrap; }
