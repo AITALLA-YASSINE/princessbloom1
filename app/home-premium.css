@@ -99,6 +99,26 @@ body:has(.pbh-home[data-home-reference="active"]) > footer { display:none; }
 .pbh-compareFeatured ul { gap:10px; }
 .pbh-compareGrid .pbh-compareFeatured li { display:block; min-height:0; border:0; }
 @media(max-width:650px) { .pbh-compareFeatured .pbh-beltFeature { min-height:62px; padding:12px 14px; font-size:12px; }.pbh-compareFeatured .pbh-beltFeatureIcon { width:35px; height:35px; } }
+.pbh-referenceCompareSection { max-width:1000px; }
+.pbh-referenceCompareSection .pbh-sectionHeading { position:relative; max-width:780px; }
+.pbh-referenceCompareSection .pbh-sectionHeading h2 { font-family:var(--font-sans),Arial,sans-serif; color:#20151b; font-size:clamp(26px,3.6vw,46px); font-weight:800; letter-spacing:-.055em; line-height:1.12; }
+.pbh-referenceCompareSection .pbh-sectionHeading h2 em { color:#ed1657; font-style:normal; font-weight:800; }
+.pbh-referenceCompareHeart { position:absolute; right:-5px; top:0; width:45px; height:55px; color:#ed1657; stroke-width:1.5; transform:rotate(-12deg); }
+.pbh-referenceComparison { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:9px; padding:10px; border-radius:25px; background:linear-gradient(120deg,#fff1f0,#f8dce2); border:1px solid #f1d5dc; }
+.pbh-referenceComparison article { min-width:0; overflow:hidden; border:1px solid white; border-radius:19px; --compare-accent:#eb1247; --compare-tint:#fbdbe0; --compare-light:#fff0f0; }
+.pbh-referenceComparison .pbh-referencePositive { --compare-accent:#08a544; --compare-tint:#dff3e6; --compare-light:#f0faf4; }
+.pbh-referenceComparison h3 { display:flex; justify-content:center; align-items:center; gap:10px; min-height:67px; padding:12px; background:linear-gradient(130deg,var(--compare-accent),color-mix(in srgb,var(--compare-accent),#000 14%)); color:white; font-family:var(--font-sans),Arial,sans-serif; font-weight:750; font-size:clamp(14px,1.7vw,22px); letter-spacing:-.04em; line-height:1.2; }
+.pbh-referenceComparison h3>span { display:grid; place-items:center; width:36px; height:36px; flex:none; border-radius:50%; background:white; color:var(--compare-accent); }
+.pbh-referenceComparison h3 svg { width:26px; height:26px; stroke-width:3; }
+.pbh-referenceComparison ul { display:grid; padding:0; margin:0; list-style:none; background:var(--compare-light); }
+.pbh-referenceComparison li { display:flex; align-items:center; gap:12px; min-height:90px; padding:15px; background:var(--compare-tint); border-radius:16px; border-bottom:2px solid white; color:#25232c; font-size:clamp(11px,1.3vw,15px); font-weight:500; line-height:1.4; }
+.pbh-referenceComparison li:nth-child(even) { background:var(--compare-light); }
+.pbh-referenceComparison li:last-child { border-bottom:0; }
+.pbh-referenceFeatureIcon { width:44px; height:44px; flex:none; display:grid; place-items:center; border-radius:50%; color:white; background:var(--compare-accent); }
+.pbh-referenceFeatureIcon svg { width:27px; height:27px; }
+.pbh-referenceNegative .pbh-referenceFeatureIcon { background:#fff4f4; color:#b94259; border:1px solid #edc1cb; }
+.pbh-referenceCross { flex:none; width:21px; height:21px; color:#eb1247; stroke-width:3; }
+@media(max-width:650px) { .pbh-referenceComparison { gap:5px; padding:5px; border-radius:18px; }.pbh-referenceComparison article { border-radius:13px; }.pbh-referenceComparison h3 { gap:5px; min-height:57px; padding:8px 5px; font-size:12px; }.pbh-referenceComparison h3>span { width:25px; height:25px; }.pbh-referenceComparison h3 svg { width:19px; height:19px; }.pbh-referenceComparison li { min-height:88px; gap:6px; padding:9px 7px; font-size:10px; border-radius:12px; }.pbh-referenceFeatureIcon { width:29px; height:29px; }.pbh-referenceFeatureIcon svg { width:20px; height:20px; }.pbh-referenceCross { width:13px; height:13px; }.pbh-referenceCompareHeart { width:25px; height:32px; right:-4px; }.pbh-referenceCompareSection .pbh-sectionHeading h2 { font-size:clamp(23px,6.5vw,34px); } }
 .pbh-header { background:#fff; }
 .pbh-header .pbh-logo { width:176px; }
 .pbh-header .pbh-cartLink { background:transparent; border-color:transparent; }
