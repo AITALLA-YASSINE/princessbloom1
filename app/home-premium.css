@@ -98,11 +98,12 @@ body:has(.pbh-home[data-home-reference="active"]) > footer { display:none; }
 .pbh-trustpilotPreview { display:flex; flex-direction:column; align-items:flex-start; gap:5px; width:fit-content; max-width:100%; margin-top:12px; }
 .pbh-trustpilotIdentity { display:flex; align-items:center; gap:10px; }
 .pbh-trustpilotIdentity img { display:block; height:auto; flex:none; }
-.pbh-trustpilotPending { font-size:8px; font-weight:600; letter-spacing:.035em; color:#785464; }
-.pbh-trustpilotUnconfirmed { font-size:8px; color:#785464; line-height:1.4; }
+.pbh-trustpilotRating { display:flex; align-items:center; flex-wrap:wrap; gap:4px 8px; font-size:9px; color:#620f30; line-height:1.5; }
+.pbh-trustpilotRating strong { font-weight:650; white-space:nowrap; }
+.pbh-trustpilotRating>span { white-space:nowrap; }
 .pbh-paymentTrustpilot { display:flex; justify-content:center; }
 .pbh-paymentTrustpilot .pbh-trustpilotPreview { align-items:center; }
-@media(max-width:650px) { .pbh-header .pbh-logo { width:clamp(104px,27vw,128px); }.pbh-heroCopy .pbh-trustpilotPreview { margin-top:9px; gap:4px; }.pbh-heroCopy .pbh-trustpilotIdentity { gap:7px; }.pbh-heroCopy .pbh-trustpilotIdentity img:first-child { width:80px; }.pbh-heroCopy .pbh-trustpilotIdentity img:last-child { width:72px; }.pbh-heroCopy .pbh-trustpilotPending,.pbh-heroCopy .pbh-trustpilotUnconfirmed { font-size:7px; } }
+@media(max-width:650px) { .pbh-header .pbh-logo { width:clamp(104px,27vw,128px); }.pbh-heroCopy .pbh-trustpilotPreview { margin-top:9px; gap:4px; }.pbh-heroCopy .pbh-trustpilotIdentity { gap:7px; }.pbh-heroCopy .pbh-trustpilotIdentity img:first-child { width:80px; }.pbh-heroCopy .pbh-trustpilotIdentity img:last-child { width:72px; }.pbh-heroCopy .pbh-trustpilotRating { font-size:8px; gap:2px 6px; } }
 /* Let the hero grow with its copy so the overlapping benefit curve cannot
    cover the review block or secondary link, including with enlarged text. */
 .pbh-hero { height:auto; min-height:max(770px,min(65vw,900px)); max-height:none; }
