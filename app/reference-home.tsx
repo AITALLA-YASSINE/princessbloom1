@@ -163,7 +163,7 @@ function ComparisonTable() {
 
 export function ReferenceHome() {
   const pathname = usePathname();
-  const { itemCount, addToCart, cart } = useStore();
+  const { itemCount, addToCart, cart, openCartDrawer } = useStore();
   const [menuOpen, setMenuOpen] = useState(false);
   const [activePhoto, setActivePhoto] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -186,7 +186,7 @@ export function ReferenceHome() {
         <div className={s.headerInner}>
           <button ref={menuRef} type="button" className={s.menuButton} onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"} aria-expanded={menuOpen} aria-controls="home-navigation">{menuOpen ? <X /> : <Menu />}</button>
           <Link href="/" className={s.logo} onClick={() => setMenuOpen(false)} aria-label="Princess Bloom, accueil"><Image src="/massseur/logovrai.png" alt="Princess Bloom" width={1928} height={815} sizes="(max-width: 650px) 142px, 192px" preload /></Link>
-          <Link href="/panier" className={s.cartLink} onClick={() => setMenuOpen(false)} aria-label={`Panier, ${itemCount} article${itemCount > 1 ? "s" : ""}`}><ShoppingBag /><span className={s.cartCount}>{itemCount}</span></Link>
+          <button type="button" className={s.cartLink} onClick={() => { setMenuOpen(false); openCartDrawer(); }} aria-haspopup="dialog" aria-label={`Panier, ${itemCount} article${itemCount > 1 ? "s" : ""}`}><ShoppingBag /><span className={s.cartCount}>{itemCount}</span></button>
         </div>
         {menuOpen && <nav id="home-navigation" className={s.navigation} aria-label="Navigation principale">{navigation.map(([href, label]) => <Link key={href} href={href} onClick={() => setMenuOpen(false)} aria-current={pathname === href ? "page" : undefined}>{label}<ArrowRight size={15} /></Link>)}</nav>}
       </header>

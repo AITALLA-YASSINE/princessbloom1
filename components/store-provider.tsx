@@ -14,6 +14,7 @@ export type CartItem = {
 type StoreContextValue = {
   cart: CartItem[];
   cartDrawerOpen: boolean;
+  openCartDrawer: () => void;
   closeCartDrawer: () => void;
   addToCart: (item: CartItem) => void;
   updateQuantity: (id: string, quantity: number) => void;
@@ -39,6 +40,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [storageReady, setStorageReady] = useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
+  const openCartDrawer = () => setCartDrawerOpen(true);
   const closeCartDrawer = () => setCartDrawerOpen(false);
   const [promoCode, setPromoCode] = useState("");
   const [orderData, setOrderDataState] = useState<Record<string, string>>({});
@@ -72,7 +74,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
   }, [orderData, storageReady]);
 
   const addToCart = (item: CartItem) => {
-    setCartDrawerOpen(true);
+    openCartDrawer();
     setCart((current) => {
       const existing = current.find((entry) => entry.id === item.id);
       if (existing) {
@@ -124,6 +126,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
   const value: StoreContextValue = {
     cart,
     cartDrawerOpen,
+    openCartDrawer,
     closeCartDrawer,
     addToCart,
     updateQuantity,

@@ -18,7 +18,7 @@ const navItems = [
 ];
 
 export function SiteHeader() {
-  const { itemCount } = useStore();
+  const { itemCount, openCartDrawer } = useStore();
   const pathname = usePathname();
   // Cached pages remain in the DOM; checkout visibility must follow the active URL.
   const isCheckout = pathname === "/paiement" || pathname === "/livraison";
@@ -29,7 +29,7 @@ export function SiteHeader() {
       <div className="pb-header-inner">
         <button type="button" className="pb-menu-toggle" aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"} aria-expanded={menuOpen} aria-controls="site-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</button>
         <Link href="/" className="pb-wordmark" aria-label="Princess Bloom, accueil" onClick={() => setMenuOpen(false)}><Image src="/massseur/logovrai.png" alt="Princess Bloom" width={1928} height={815} className="h-10 w-auto object-contain md:h-12" preload /></Link>
-        <div className="pb-header-actions"><Link href="/panier" aria-label={`Panier, ${itemCount} article(s)`} onClick={() => setMenuOpen(false)}><ShoppingBag />{itemCount > 0 && <span className="pb-cart-count">{itemCount}</span>}</Link></div>
+        <div className="pb-header-actions"><button type="button" aria-haspopup="dialog" aria-label={`Panier, ${itemCount} article(s)`} onClick={() => { setMenuOpen(false); openCartDrawer(); }}><ShoppingBag />{itemCount > 0 && <span className="pb-cart-count">{itemCount}</span>}</button></div>
       </div>
       {menuOpen && <nav id="site-navigation" className="pb-mobile-nav" aria-label="Navigation principale">{navItems.map(item => <Link href={item.href} key={item.href} onClick={() => setMenuOpen(false)}>{item.label}</Link>)}</nav>}
     </header>
