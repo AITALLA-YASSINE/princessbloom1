@@ -11,7 +11,7 @@ import { CHECKOUT_CATALOG, COUNTRIES } from "@/lib/checkout";
 import { STRIPE_PAYMENT_METHODS } from "@/lib/payment-methods";
 
 const catalog: Record<string, { name: string; price: number; oldPrice: number }> = CHECKOUT_CATALOG;
-const publicKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
+const publicKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY?.trim().replace(/^(['"])([\s\S]*)\1$/, "$2").trim();
 const stripePromise = publicKey ? loadStripe(publicKey, { locale: "fr" }) : null;
 const money = (value: number) => new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(value);
 const countryNames: Record<string, string> = { FR: "France", BE: "Belgique", LU: "Luxembourg", DE: "Allemagne", ES: "Espagne", IT: "Italie", NL: "Pays-Bas", PT: "Portugal", AT: "Autriche", IE: "Irlande" };
