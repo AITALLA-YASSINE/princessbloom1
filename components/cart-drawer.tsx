@@ -64,7 +64,7 @@ export function CartDrawer() {
             {discount > 0 && <div className="cart-drawer-summary-line"><span>Réduction supplémentaire</span><span>−{euros(discount)}</span></div>}
             <div className="cart-drawer-summary-line"><span>Livraison</span><span>{shipping === 0 ? "Offerte" : euros(shipping)}</span></div>
             <div className="cart-drawer-total"><span>Total · {itemCount} article{itemCount > 1 ? "s" : ""}</span><strong aria-live="polite">{euros(total)}</strong></div>
-            <Link href="/paiement" className="cart-drawer-checkout" onClick={closeCartDrawer}><LockKeyhole />Passer commande<ArrowRight /></Link>
+            <Link href="/paiement" className="cart-drawer-checkout" onClick={closeCartDrawer}><LockKeyhole />Paiement sécurisé<ArrowRight /></Link>
             <p className="cart-drawer-secure"><LockKeyhole />Paiement sécurisé</p>
           </>}
           <button type="button" className="cart-drawer-continue" onClick={closeCartDrawer}>Continuer mes achats</button>
