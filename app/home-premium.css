@@ -92,6 +92,17 @@ body:has(.pbh-home[data-home-reference="active"]) > footer { display:none; }
   .pbh-footer { padding:40px 22px 23px; }.pbh-footerTop { grid-template-columns:1fr 1fr; gap:30px 20px; }.pbh-footerBrand { grid-column:span 2; text-align:center; margin-bottom:5px; }.pbh-footerBrand>img { margin:auto; width:165px; }.pbh-footerBrand>svg { margin:15px auto 0; }.pbh-footerTop h2 { font-size:9px; margin-bottom:17px; }.pbh-footerTop>div>a { font-size:11px; }.pbh-footerBottom { font-size:9px; gap:10px; margin-top:30px; }
 }
 @media(max-width:360px) { .pbh-hero { height:550px; padding-inline:15px; }.pbh-heroCopy h1 { font-size:42px; }.pbh-heroCopy>p { font-size:10px; }.pbh-heroCopy>.pbh-primary { padding-inline:12px; font-size:10px; }.pbh-heroSecondary { font-size:8px; }.pbh-floatingProduct { gap:9px; padding:11px; }.pbh-floatingProduct>img { width:67px; height:75px; }.pbh-floatingProduct h2 { font-size:12px; }.pbh-neutralProof { font-size:8px; gap:5px; }.pbh-home h2 { font-size:36px; }.pbh-buyRow>.pbh-primary { font-size:10px; }.pbh-thumbnails button { width:48px; height:48px; } }
+.pbh-header { background:#fff; }
+.pbh-header .pbh-logo { width:176px; }
+.pbh-header .pbh-cartLink { background:transparent; border-color:transparent; }
+.pbh-trustpilotPreview { display:flex; flex-direction:column; align-items:flex-start; gap:5px; width:fit-content; max-width:100%; margin-top:12px; }
+.pbh-trustpilotIdentity { display:flex; align-items:center; gap:10px; }
+.pbh-trustpilotIdentity img { display:block; height:auto; flex:none; }
+.pbh-trustpilotPending { font-size:8px; font-weight:600; letter-spacing:.035em; color:#785464; }
+.pbh-trustpilotUnconfirmed { font-size:8px; color:#785464; line-height:1.4; }
+.pbh-paymentTrustpilot { display:flex; justify-content:center; }
+.pbh-paymentTrustpilot .pbh-trustpilotPreview { align-items:center; }
+@media(max-width:650px) { .pbh-header .pbh-logo { width:clamp(104px,27vw,128px); }.pbh-heroCopy .pbh-trustpilotPreview { margin-top:9px; gap:4px; }.pbh-heroCopy .pbh-trustpilotIdentity { gap:7px; }.pbh-heroCopy .pbh-trustpilotIdentity img:first-child { width:80px; }.pbh-heroCopy .pbh-trustpilotIdentity img:last-child { width:72px; }.pbh-heroCopy .pbh-trustpilotPending,.pbh-heroCopy .pbh-trustpilotUnconfirmed { font-size:7px; } }
 .pbh-cartLink { color:inherit; }
 .pbh-promo,.pbh-reassurance { display:block; overflow:hidden; padding:0; }
 .pbh-marqueeTrack { display:flex; width:max-content; animation:pbhMarqueeRight 38s linear infinite; will-change:transform; }
