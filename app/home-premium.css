@@ -103,6 +103,13 @@ body:has(.pbh-home[data-home-reference="active"]) > footer { display:none; }
 .pbh-paymentTrustpilot { display:flex; justify-content:center; }
 .pbh-paymentTrustpilot .pbh-trustpilotPreview { align-items:center; }
 @media(max-width:650px) { .pbh-header .pbh-logo { width:clamp(104px,27vw,128px); }.pbh-heroCopy .pbh-trustpilotPreview { margin-top:9px; gap:4px; }.pbh-heroCopy .pbh-trustpilotIdentity { gap:7px; }.pbh-heroCopy .pbh-trustpilotIdentity img:first-child { width:80px; }.pbh-heroCopy .pbh-trustpilotIdentity img:last-child { width:72px; }.pbh-heroCopy .pbh-trustpilotPending,.pbh-heroCopy .pbh-trustpilotUnconfirmed { font-size:7px; } }
+/* Let the hero grow with its copy so the overlapping benefit curve cannot
+   cover the review block or secondary link, including with enlarged text. */
+.pbh-hero { height:auto; min-height:max(770px,min(65vw,900px)); max-height:none; }
+@media(min-width:1600px) { .pbh-hero { min-height:900px; } }
+@media(max-width:1000px) { .pbh-hero { min-height:700px; } }
+@media(max-width:650px) { .pbh-hero { min-height:590px; } }
+@media(max-width:360px) { .pbh-hero { min-height:550px; } }
 .pbh-cartLink { color:inherit; }
 .pbh-promo,.pbh-reassurance { display:block; overflow:hidden; padding:0; }
 .pbh-marqueeTrack { display:flex; width:max-content; animation:pbhMarqueeRight 38s linear infinite; will-change:transform; }
