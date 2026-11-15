@@ -1,16 +1,19 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import Stripe from "stripe";
+import { connection } from "next/server";
+import { getStripeSecretKey } from "@/lib/stripe-config";
 import { Check, CircleHelp, LockKeyhole } from "lucide-react";
 
 async function VerifiedConfirmation({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
+  await connection();
   const params = await searchParams;
   let state: "paid" | "processing" | "pending" = "pending";
   let amount: number | null = null;
   let currency = "EUR";
   if (process.env.STRIPE_SECRET_KEY) {
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2026-09-30.endive" });
     try {
+      const stripe = new Stripe(getStripeSecretKey(), { apiVersion: "2026-09-30.endive" });
       if (typeof params.payment_intent === "string" && typeof params.payment_intent_client_secret === "string") {
         const intent = await stripe.paymentIntents.retrieve(params.payment_intent);
         if (intent.client_secret === params.payment_intent_client_secret) {
@@ -28,5 +31,5 @@ async function VerifiedConfirmation({ searchParams }: { searchParams: Promise<Re
 }
 
 export default function ConfirmationPage(props: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
-  return <Suspense fallback={<main className="mx-auto max-w-3xl px-5 py-20 text-center" role="status">V?rification de votre paiement?</main>}><VerifiedConfirmation {...props} /></Suspense>;
+  return <Suspense fallback={<main className="mx-auto max-w-3xl px-5 py-20 text-center" role="status">Vérification de votre paiement…</main>}><VerifiedConfirmation {...props} /></Suspense>;
 }
