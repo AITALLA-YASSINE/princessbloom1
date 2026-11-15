@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRef, useState } from "react";
-import { ArrowDown, ArrowLeft, ArrowRight, BatteryCharging, Check, Crown, Droplets, EyeOff, Flower2, Heart, HeartHandshake, LockKeyhole, Mail, Menu, MessageCircle, Minus, MoveHorizontal, Play, Plus, RotateCcw, ShoppingBag, SlidersHorizontal, ThermometerSun, Timer, Truck, Waves, X, ZoomIn } from "lucide-react";
+import { Armchair, ArrowDown, ArrowLeft, ArrowRight, BatteryCharging, Briefcase, Check, CircleOff, Crown, Droplets, EyeOff, Feather, Flame, Flower2, Footprints, Hand, Heart, HeartHandshake, LockKeyhole, Mail, Menu, MessageCircle, Minus, MoveHorizontal, Pill, Play, Plus, RotateCcw, ShieldCheck, ShoppingBag, SlidersHorizontal, ThermometerSun, Timer, Truck, Waves, X, ZoomIn } from "lucide-react";
 import { useStore } from "@/components/store-provider";
 import { product } from "@/lib/site-data";
 import { CHECKOUT_CATALOG, getCheckoutTotals } from "@/lib/checkout";
@@ -162,18 +162,36 @@ function TrustpilotSummary() {
 }
 
 const beltFeatures = [
-  { label: "Sans fil après recharge", icon: BatteryCharging },
-  { label: "5 niveaux de température", icon: ThermometerSun },
-  { label: "4 modes de vibration", icon: Waves },
-  { label: "Sangle ajustable", icon: MoveHorizontal },
+  { label: "5 niveaux de chaleur", icon: ThermometerSun },
+  { label: "Légère, portable et mains libres", icon: Feather },
+  { label: "Bougez librement", icon: Footprints },
+  { label: "Chauffe sans ajout d’eau", icon: Droplets },
+  { label: "Prête à utiliser une fois chargée", icon: BatteryCharging },
+  { label: "Confort sans médicament", icon: Feather },
+  { label: "Solution non médicamenteuse", icon: CircleOff },
+  { label: "Utilisable pendant vos activités", icon: Flower2 },
+  { label: "Réglez la chaleur comme vous voulez 🌡️", icon: SlidersHorizontal },
+  { label: "Chaleur réglable, à utiliser avec précaution", icon: ShieldCheck },
+  { label: "Gardez les mains libres", icon: Hand },
+  { label: "Utilisable au bureau comme à la maison", icon: Briefcase },
+  { label: "Emportez-la facilement avec vous", icon: ShoppingBag },
 ];
 
 function ComparisonTable() {
   const classicFeatures = [
-    { label: "Besoin de chauffer de l’eau", icon: Droplets },
     { label: "Chaleur qui refroidit progressivement", icon: ThermometerSun },
-    { label: "Sans fonction de vibration", icon: Waves },
-    { label: "À maintenir sur la zone souhaitée", icon: MoveHorizontal },
+    { label: "Bouillotte encombrante", icon: ShoppingBag },
+    { label: "Déplacements limités", icon: MoveHorizontal },
+    { label: "Besoin de chauffer de l’eau", icon: Droplets },
+    { label: "Préparation nécessaire", icon: Timer },
+    { label: "Médicaments : effets secondaires possibles", icon: Pill },
+    { label: "Médicaments : contre-indications possibles", icon: CircleOff },
+    { label: "Difficile de rester active avec une bouillotte", icon: Footprints },
+    { label: "Chaleur difficile à ajuster", icon: SlidersHorizontal },
+    { label: "Risque de brûlure avec une bouillotte trop chaude", icon: Flame },
+    { label: "Nécessite parfois de rester immobile", icon: Armchair },
+    { label: "Pas toujours pratique au travail", icon: Briefcase },
+    { label: "Bouillotte difficile à transporter partout", icon: ShoppingBag },
   ];
   return <div className="pbh-referenceComparison" aria-label="Comparaison des solutions classiques et de notre ceinture chauffante">
     {[{ title: "Solutions classiques", features: classicFeatures, positive: false }, { title: "Notre ceinture chauffante", features: beltFeatures, positive: true }].map(({ title, features, positive }) => <article key={title} className={positive ? "pbh-referencePositive" : "pbh-referenceNegative"}>
@@ -255,7 +273,7 @@ export function ReferenceHome() {
 
     <section className={s.videoSection} aria-labelledby="videos-title"><div className={s.section}><div className={s.sectionHeading}><span className={s.eyebrow}>À découvrir prochainement</span><h2 id="videos-title">Princess Bloom,<br />en <em>mouvement.</em></h2><p>Les présentations et démonstrations vidéo seront bientôt à retrouver ici.</p></div><div className={s.videoGrid}><VideoSlot number={1} title="Découvrez Princess Bloom" poster="/photos/product-hero-square.webp" /><VideoSlot number={2} title="Comment utiliser votre ceinture ?" poster="/photos/lifestyle-worn-closeup.webp" /><VideoSlot number={3} title="Un moment de douceur au quotidien" poster="/photos/lifestyle-reading.webp" /></div></div></section>
 
-    <section className={`${s.section} ${s.comparison} pbh-referenceCompareSection`} aria-labelledby="comparison-title"><div className={s.sectionHeading}><h2 id="comparison-title">Pourquoi continuer<br />avec les <em>solutions classiques ?</em></h2><Heart className="pbh-referenceCompareHeart" aria-hidden="true" /></div><ComparisonTable /><p className={s.compareNote}>Comparaison avec une bouillotte classique à eau. Les caractéristiques des autres solutions de confort varient selon le modèle.</p></section>
+    <section className={`${s.section} ${s.comparison} pbh-referenceCompareSection`} aria-labelledby="comparison-title"><div className={s.sectionHeading}><h2 id="comparison-title">Pourquoi continuer<br />avec les <em>solutions classiques ?</em></h2><Heart className="pbh-referenceCompareHeart" aria-hidden="true" /></div><ComparisonTable /><p className={s.compareNote}>Comparaison indicative : les caractéristiques des solutions classiques varient selon le modèle ou le produit.</p></section>
 
     <section className={s.reviewsSection} aria-labelledby="reviews-title"><div className={s.section}><span className={s.eyebrow}>La confiance se construit avec vous</span><div className={s.reviewsLayout}><div><h2 id="reviews-title">Elles partagent leur expérience<br /><em>Princess Bloom.</em></h2><p>Votre expérience compte. Nous souhaitons lui donner une place juste, avec des avis authentiques et une source identifiable.</p><Link href="/contact" className={s.textLink}>Partager mon expérience <ArrowRight size={16} /></Link></div><div className={s.reviewPlaceholder}><MessageCircle strokeWidth={1.1} /><span>Avis clients</span><h3>Vos expériences,<br />bientôt ici.</h3><p>Un espace réservé aux futurs avis authentiques et à une éventuelle intégration officielle Trustpilot.</p><small>Aucune note ni aucun témoignage ne sont affichés en attendant.</small></div></div></div></section>
 

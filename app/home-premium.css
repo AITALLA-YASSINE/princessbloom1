@@ -114,6 +114,7 @@ body:has(.pbh-home[data-home-reference="active"]) > footer { display:none; }
 .pbh-referenceComparison li { display:flex; align-items:center; gap:12px; min-height:90px; padding:15px; background:var(--compare-tint); border-radius:16px; border-bottom:2px solid white; color:#25232c; font-size:clamp(11px,1.3vw,15px); font-weight:500; line-height:1.4; }
 .pbh-referenceComparison li:nth-child(even) { background:var(--compare-light); }
 .pbh-referenceComparison li:last-child { border-bottom:0; }
+.pbh-referenceComparison li>span:last-child { min-width:0; overflow-wrap:anywhere; }
 .pbh-referenceFeatureIcon { width:44px; height:44px; flex:none; display:grid; place-items:center; border-radius:50%; color:white; background:var(--compare-accent); }
 .pbh-referenceFeatureIcon svg { width:27px; height:27px; }
 .pbh-referenceNegative .pbh-referenceFeatureIcon { background:#fff4f4; color:#b94259; border:1px solid #edc1cb; }
