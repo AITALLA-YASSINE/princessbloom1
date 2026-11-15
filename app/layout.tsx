@@ -28,7 +28,7 @@ const sans = localFont({
 export const metadata: Metadata = {
   title: "Princess Bloom | Votre bien-être discret",
   description:
-    "Boutique premium Princess Bloom — ceinture chauffante et massante pensée pour accompagner vos journées avec douceur.",
+    "Boutique premium Princess Bloom — Ceinture Menstruelle Chauffante pour les règles douloureuses pensée pour accompagner vos journées avec douceur.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

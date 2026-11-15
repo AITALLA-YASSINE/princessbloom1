@@ -2,11 +2,11 @@ import { CHECKOUT_CATALOG } from "@/lib/checkout";
 
 export const product = {
   id: "princessbloom-ceinture",
-  name: "Princess Bloom — Ceinture Chauffante & Massante Menstruelle",
+  name: "Princess Bloom — Ceinture Menstruelle Chauffante pour les règles douloureuses",
   price: CHECKOUT_CATALOG["princessbloom-ceinture"].price / 100,
   oldPrice: CHECKOUT_CATALOG["princessbloom-ceinture"].oldPrice / 100,
   description:
-    "Une ceinture chauffante et massante pensée pour vous accompagner dans votre quotidien avec douceur, chaleur ciblée et confort discret.",
+    "Une Ceinture Menstruelle Chauffante pour les règles douloureuses pensée pour vous accompagner dans votre quotidien avec douceur, chaleur ciblée et confort discret.",
   features: [
     "5 niveaux de température",
     "4 modes de vibration",

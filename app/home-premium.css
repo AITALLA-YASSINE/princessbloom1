@@ -139,6 +139,7 @@ body:has(.pbh-home[data-home-reference="active"]) > footer { display:none; }
 @media(max-width:1000px) { .pbh-hero { min-height:700px; } }
 @media(max-width:650px) { .pbh-hero { min-height:590px; } }
 @media(max-width:360px) { .pbh-hero { min-height:550px; } }
+.pbh-floatingProduct>div { min-width:0; flex:1; }
 .pbh-cartLink { color:inherit; }
 .pbh-promo,.pbh-reassurance { display:block; overflow:hidden; padding:0; }
 .pbh-marqueeTrack { display:flex; width:max-content; animation:pbhMarqueeRight 38s linear infinite; will-change:transform; }

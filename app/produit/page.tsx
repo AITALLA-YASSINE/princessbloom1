@@ -50,7 +50,7 @@ export default function ProductPage() {
         </section>
         <section className="pb-details" aria-label="Choisir votre ceinture">
           <div className="pb-reviews"><Link href="/avis" className="pb-rating"><span>{Array.from({ length: 5 }, (_, i) => <Star key={i} />)}</span><span><b>4,9/5</b> (1 327 avis vérifiés)</span></Link><span className="pb-community"><UserRound /><b>+2 500 femmes soulagées</b></span></div>
-          <h1>Ceinture chauffante et massante<br className="pb-title-break" /> Princess Bloom</h1>
+          <h1>Ceinture Menstruelle Chauffante pour les règles douloureuses<br className="pb-title-break" /> Princess Bloom</h1>
           <div className="pb-price"><strong>{price.toFixed(2).replace(".", ",")} €</strong><del>{product.oldPrice.toFixed(2).replace(".", ",")} €</del><span>-{Math.round((1 - price / product.oldPrice) * 100)} %</span></div>
           <ul className="pb-features">{["Soulage efficacement les douleurs de règles", "Chaleur douce et réglable (5 niveaux)", "Massage relaxant (4 modes de vibration)", "Confortable, légère et discrète"].map(text => <li key={text}><Check />{text}</li>)}</ul>
           <button className="pb-add" onClick={handleAddToCart}><ShoppingBag />Ajouter au panier<ArrowRight /></button>
@@ -59,7 +59,7 @@ export default function ProductPage() {
           <Link className="pb-shipping" href="/livraison"><Truck /><span><strong>Livraison en 5 à 10 jours ouvrés · Livraison offerte</strong><small>Préparée et expédiée sous 48 h, avec un suivi de commande.</small></span></Link>
         </section>
       </div>
-      <div className="pb-sticky-cart"><div className="pb-sticky-summary"><ProductVisual /><span><strong>Ceinture chauffante et massante</strong><b>{price.toFixed(2).replace(".", ",")} €</b></span></div><button className="pb-add" onClick={handleAddToCart}>Ajouter au panier<ArrowRight /></button></div>
+      <div className="pb-sticky-cart"><div className="pb-sticky-summary"><ProductVisual /><span><strong>Ceinture Menstruelle Chauffante pour les règles douloureuses</strong><b>{price.toFixed(2).replace(".", ",")} €</b></span></div><button className="pb-add" onClick={handleAddToCart}>Ajouter au panier<ArrowRight /></button></div>
     </main>
   );
 }

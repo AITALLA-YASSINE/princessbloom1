@@ -52,7 +52,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
       const storedCart = localStorage.getItem(CART_KEY);
       if (storedCart) setCart(JSON.parse(storedCart).map((item: CartItem) => {
         const entry = CHECKOUT_CATALOG[item.id as keyof typeof CHECKOUT_CATALOG];
-        return entry ? { ...item, price: entry.price / 100, image: "/photos/product-hero-square.webp" } : item;
+        return entry ? { ...item, name: entry.name, price: entry.price / 100, image: "/photos/product-hero-square.webp" } : item;
       }));
     } catch { /* Keep an empty cart if storage is unavailable or invalid. */ }
     try {
