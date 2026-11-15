@@ -1,0 +1,20 @@
+# Princess Bloom — visuels du hero
+
+Mode : outil intégré imagegen. Sources originales conservées ; aucun asset partagé remplacé.
+
+## Références
+- public/photos/home-campaign-reference-v2.webp : composition et ambiance.
+- public/photos/product-hero-square.webp : produit confirmé par l’utilisateur.
+
+## Fichiers intégrés
+- public/photos/home-hero-desktop-v3.webp — 1536 × 1024
+- public/photos/home-hero-mobile-v3.webp — 1024 × 1536
+
+## Prompt ordinateur
+Use case: precise-object-edit / compositing. Create one clean photographic website hero BACKGROUND, landscape 3:2. Image 1 is composition and model reference. Image 2 is authoritative exact real Princess Bloom product. Remove ALL typography, UI, status bar, logo in header, promotional strip, crowns, CTA buttons, icons, product price card, decorative graphics; retain only a real photography scene. Recompose upper photographic scene in landscape: same adult brunette relaxed on a blush sofa with ivory ribbed top, cream knit cardigan and ivory trousers, face and entire worn belt clearly visible ON THE RIGHT HALF of frame. Keep left 45% mostly empty softly lit blush curtains with subtle pink roses near bottom left, suitable for overlaying real HTML headline and copy. Photo subject extends from head at upper right to knees at bottom, hand behind hair, luxurious cocooning room, warm natural light, soft blush and champagne palette, realistic pores and individual hairs and weave. EXACT product from image 2 worn proportionately at lower abdomen: rounded wide blush pink front, black vertical oval control on VIEWER LEFT with thin pink rim, two small gold tabs left of oval, tiny blue tab on right of oval, exact PRINCESS BLOOM black wordmark center-right and embossed pink heart at far right, pink woven strap and matching buckles, thin grey soft lining. No redesign or mirroring or substitute. Integrate belt naturally with coherent contact shadows and realistic perspective. No new lettering except original product logo. Photorealistic premium advertising campaign quality, natural anatomy, relaxed expression. Product and face must remain inside rightmost 55% so mobile crop can retain both.
+
+## Prompt mobile
+Use case: precise-object-edit / compositing. Create a clean portrait 2:3 mobile photographic background based on image 1's upper photo scene, WITHOUT ANY TEXT OR UI. Keep the same adult brunette woman's relaxed pose, face in upper right, hand behind hair, ivory ribbed top and cream cardigan, beautiful pink couch and warm blush room with roses, soft curtains and natural daylight. Subject ON RIGHT HALF, face at x75% y24%, exact pink belt at x74% y70%, knees at bottom. LEFT 45% is soft pale blush negative space curtains with few roses near bottom suitable for real HTML copy; no text or graphics on left. Remove phone status, promotion, brand header, all words, buttons, icons, badges, all lower product card and graphic sections. Fill complete frame as a continuous ultra-realistic real premium lifestyle photograph. Use image 2 as authoritative product: exact rounded blush housing, vertical black oval control VIEWER LEFT, thin pink rim, two small gold tabs left and tiny blue tab right of oval, PRINCESS BLOOM black wordmark center-right, embossed heart far right, PINK woven strap and matching pink buckles, thin grey lining. Product shape, all details and proportions faithful to image 2, no redesign or mirroring. Belt rests naturally on lower abdomen with contact shadows, hands not covering it, realistic body proportion, skin pores and natural strands, actual woven cardigan texture. No text other than exact original wordmark on product. Warm feminine refined blush/champagne palette, match the reference scene closely.
+
+## Choix de contenu
+Prix et caractéristiques issus du catalogue existant ; code PRINCESSBLOOM5 vérifié par getCheckoutTotals. Ancien prix omis faute d’historique de prix vérifiable. Aucun avis, note ou nombre de clientes inventé. Trustpilot, vidéos et newsletter restent des emplacements explicites. Informations pédagogiques sur les contractions et la chaleur recoupées avec l’Assurance Maladie ; aucune promesse de guérison.
