@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRef, useState } from "react";
-import { ArrowDown, ArrowLeft, ArrowRight, Check, Crown, EyeOff, Flower2, Heart, HeartHandshake, LockKeyhole, Mail, Menu, MessageCircle, Minus, MoveHorizontal, Play, Plus, RotateCcw, ShoppingBag, SlidersHorizontal, ThermometerSun, Timer, Truck, Waves, X, ZoomIn } from "lucide-react";
+import { ArrowDown, ArrowLeft, ArrowRight, BatteryCharging, Check, Crown, EyeOff, Flower2, Heart, HeartHandshake, LockKeyhole, Mail, Menu, MessageCircle, Minus, MoveHorizontal, Play, Plus, RotateCcw, ShoppingBag, SlidersHorizontal, ThermometerSun, Timer, Truck, Waves, X, ZoomIn } from "lucide-react";
 import { useStore } from "@/components/store-provider";
 import { product } from "@/lib/site-data";
 import { CHECKOUT_CATALOG, getCheckoutTotals } from "@/lib/checkout";
@@ -161,6 +161,18 @@ function TrustpilotSummary() {
   </div>;
 }
 
+const beltFeatures = [
+  { label: "Sans fil après recharge", icon: BatteryCharging },
+  { label: "5 niveaux de température", icon: ThermometerSun },
+  { label: "4 modes de vibration", icon: Waves },
+  { label: "Sangle ajustable", icon: MoveHorizontal },
+];
+
+function BeltFeature({ index }: { index: number }) {
+  const { label, icon: Icon } = beltFeatures[index];
+  return <div className="pbh-beltFeature"><span className="pbh-beltFeatureIcon" aria-hidden="true"><Icon size={19} strokeWidth={1.45} /></span><span>{label}</span></div>;
+}
+
 function ComparisonTable() {
   const rows = [
     ["Mobilité", "À poser ou à maintenir", "Selon l’alimentation", "Sans fil après recharge"],
@@ -168,7 +180,7 @@ function ComparisonTable() {
     ["Vibrations", "Sans fonction de vibration", "Selon le modèle", product.features[1]],
     ["Maintien", "Se pose sur la zone souhaitée", "Selon le modèle", "Sangle ajustable"],
   ];
-  return <div className="pbh-compareTable"><table><caption>Les solutions de confort, en un regard</caption><thead><tr><th scope="col">Votre confort</th><th scope="col">Bouillotte classique</th><th scope="col">Coussin chauffant</th><th scope="col"><Crown size={20} />Princess Bloom</th></tr></thead><tbody>{rows.map(([label, ...values]) => <tr key={label}><th scope="row">{label}</th>{values.map((value, i) => <td key={i}>{value}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="pbh-compareTable"><table><caption>Les solutions de confort, en un regard</caption><thead><tr><th scope="col">Votre confort</th><th scope="col">Bouillotte classique</th><th scope="col">Coussin chauffant</th><th scope="col"><Crown size={20} />Princess Bloom</th></tr></thead><tbody>{rows.map(([label, ...values], rowIndex) => <tr key={label}><th scope="row">{label}</th>{values.map((value, i) => <td key={i}>{i === 2 ? <BeltFeature index={rowIndex} /> : value}</td>)}</tr>)}</tbody></table></div>;
 }
 
 export function ReferenceHome() {
@@ -243,7 +255,7 @@ export function ReferenceHome() {
 
     <section className={s.videoSection} aria-labelledby="videos-title"><div className={s.section}><div className={s.sectionHeading}><span className={s.eyebrow}>À découvrir prochainement</span><h2 id="videos-title">Princess Bloom,<br />en <em>mouvement.</em></h2><p>Les présentations et démonstrations vidéo seront bientôt à retrouver ici.</p></div><div className={s.videoGrid}><VideoSlot number={1} title="Découvrez Princess Bloom" poster="/photos/product-hero-square.webp" /><VideoSlot number={2} title="Comment utiliser votre ceinture ?" poster="/photos/lifestyle-worn-closeup.webp" /><VideoSlot number={3} title="Un moment de douceur au quotidien" poster="/photos/lifestyle-reading.webp" /></div></div></section>
 
-    <section className={`${s.section} ${s.comparison}`} aria-labelledby="comparison-title"><div className={s.sectionHeading}><span className={s.eyebrow}>À chaque envie, sa solution de confort</span><h2 id="comparison-title">Et si votre confort s’adaptait<br />enfin à votre <em>quotidien ?</em></h2></div><ComparisonTable /><div className={s.compareGrid}>{[{ title: "Bouillotte classique", subtitle: "La chaleur en toute simplicité", values: ["Se remplit d’eau chaude", "Chaleur qui évolue en refroidissant", "Sans fonction de vibration", "Se pose sur la zone souhaitée"] }, { title: "Coussin chauffant", subtitle: "Un moment de chaleur chez soi", values: ["Alimentation selon le modèle", "Réglage selon le modèle", "Vibrations selon le modèle", "Mobilité selon l’alimentation"] }, { title: "Princess Bloom", subtitle: "Une chaleur à votre rythme", values: ["Utilisation sans fil après recharge", "5 niveaux de température", "4 modes de vibration", "Sangle ajustable autour du ventre"] }].map(({ title, subtitle, values }, i) => <article key={title} className={i === 2 ? s.compareFeatured : undefined}><span className={s.compareIndex}>{i === 2 ? <Crown size={22} /> : `0${i + 1}`}</span><h3>{title}</h3><p>{subtitle}</p><ul>{values.map(value => <li key={value}><Check size={15} />{value}</li>)}</ul></article>)}</div><p className={s.compareNote}>Comparaison indicative : les caractéristiques des bouillottes à eau et des coussins chauffants varient selon le modèle. Consultez leurs notices respectives.</p></section>
+    <section className={`${s.section} ${s.comparison}`} aria-labelledby="comparison-title"><div className={s.sectionHeading}><span className={s.eyebrow}>À chaque envie, sa solution de confort</span><h2 id="comparison-title">Et si votre confort s’adaptait<br />enfin à votre <em>quotidien ?</em></h2></div><ComparisonTable /><div className={s.compareGrid}>{[{ title: "Bouillotte classique", subtitle: "La chaleur en toute simplicité", values: ["Se remplit d’eau chaude", "Chaleur qui évolue en refroidissant", "Sans fonction de vibration", "Se pose sur la zone souhaitée"] }, { title: "Coussin chauffant", subtitle: "Un moment de chaleur chez soi", values: ["Alimentation selon le modèle", "Réglage selon le modèle", "Vibrations selon le modèle", "Mobilité selon l’alimentation"] }, { title: "Princess Bloom", subtitle: "Une chaleur à votre rythme", values: beltFeatures.map(feature => feature.label) }].map(({ title, subtitle, values }, i) => <article key={title} className={i === 2 ? s.compareFeatured : undefined}><span className={s.compareIndex}>{i === 2 ? <Crown size={22} /> : `0${i + 1}`}</span><h3>{title}</h3><p>{subtitle}</p><ul>{values.map((value, featureIndex) => <li key={value}>{i === 2 ? <BeltFeature index={featureIndex} /> : <><Check size={15} />{value}</>}</li>)}</ul></article>)}</div><p className={s.compareNote}>Comparaison indicative : les caractéristiques des bouillottes à eau et des coussins chauffants varient selon le modèle. Consultez leurs notices respectives.</p></section>
 
     <section className={s.reviewsSection} aria-labelledby="reviews-title"><div className={s.section}><span className={s.eyebrow}>La confiance se construit avec vous</span><div className={s.reviewsLayout}><div><h2 id="reviews-title">Elles partagent leur expérience<br /><em>Princess Bloom.</em></h2><p>Votre expérience compte. Nous souhaitons lui donner une place juste, avec des avis authentiques et une source identifiable.</p><Link href="/contact" className={s.textLink}>Partager mon expérience <ArrowRight size={16} /></Link></div><div className={s.reviewPlaceholder}><MessageCircle strokeWidth={1.1} /><span>Avis clients</span><h3>Vos expériences,<br />bientôt ici.</h3><p>Un espace réservé aux futurs avis authentiques et à une éventuelle intégration officielle Trustpilot.</p><small>Aucune note ni aucun témoignage ne sont affichés en attendant.</small></div></div></div></section>
 

@@ -92,6 +92,13 @@ body:has(.pbh-home[data-home-reference="active"]) > footer { display:none; }
   .pbh-footer { padding:40px 22px 23px; }.pbh-footerTop { grid-template-columns:1fr 1fr; gap:30px 20px; }.pbh-footerBrand { grid-column:span 2; text-align:center; margin-bottom:5px; }.pbh-footerBrand>img { margin:auto; width:165px; }.pbh-footerBrand>svg { margin:15px auto 0; }.pbh-footerTop h2 { font-size:9px; margin-bottom:17px; }.pbh-footerTop>div>a { font-size:11px; }.pbh-footerBottom { font-size:9px; gap:10px; margin-top:30px; }
 }
 @media(max-width:360px) { .pbh-hero { height:550px; padding-inline:15px; }.pbh-heroCopy h1 { font-size:42px; }.pbh-heroCopy>p { font-size:10px; }.pbh-heroCopy>.pbh-primary { padding-inline:12px; font-size:10px; }.pbh-heroSecondary { font-size:8px; }.pbh-floatingProduct { gap:9px; padding:11px; }.pbh-floatingProduct>img { width:67px; height:75px; }.pbh-floatingProduct h2 { font-size:12px; }.pbh-neutralProof { font-size:8px; gap:5px; }.pbh-home h2 { font-size:36px; }.pbh-buyRow>.pbh-primary { font-size:10px; }.pbh-thumbnails button { width:48px; height:48px; } }
+.pbh-compareTable tbody td:last-child { padding:8px 10px; }
+.pbh-beltFeature { display:flex; align-items:center; gap:11px; min-height:52px; padding:10px 12px; border:1px solid #eccbd7; border-radius:12px; background:linear-gradient(110deg,#fff9f8,#fae9ee); color:#720f36; font-family:var(--font-sans),Arial,sans-serif; font-size:11px; font-weight:500; line-height:1.5; }
+.pbh-beltFeatureIcon { display:grid; place-items:center; flex:none; width:32px; height:32px; border:1px solid #edc2d1; border-radius:50%; background:#f7dce6; color:#a51450; }
+.pbh-beltFeature>span:last-child { min-width:0; overflow-wrap:break-word; }
+.pbh-compareFeatured ul { gap:10px; }
+.pbh-compareGrid .pbh-compareFeatured li { display:block; min-height:0; border:0; }
+@media(max-width:650px) { .pbh-compareFeatured .pbh-beltFeature { min-height:62px; padding:12px 14px; font-size:12px; }.pbh-compareFeatured .pbh-beltFeatureIcon { width:35px; height:35px; } }
 .pbh-header { background:#fff; }
 .pbh-header .pbh-logo { width:176px; }
 .pbh-header .pbh-cartLink { background:transparent; border-color:transparent; }
