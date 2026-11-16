@@ -1,5 +1,5 @@
-import PaymentCheckout from "@/components/payment-checkout";
+import StripeCheckoutFormPage from "@/components/stripe-checkout-form";
 
 export default function PaymentPage() {
-  return <PaymentCheckout comparison />;
+  return <StripeCheckoutFormPage />;
 }

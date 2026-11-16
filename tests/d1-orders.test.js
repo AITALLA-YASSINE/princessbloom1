@@ -76,3 +76,18 @@ test('webhook retries database writes even after a Stripe paid marker exists',as
   assert.equal((await processStripePaymentEvent(event,stripe,async()=>{saved=true;})).status,'paid');
   assert.ok(saved);
 });
+
+test('Checkout enriches an earlier processing order without changing fulfillment or duplicating it',async()=>{
+  const {db,options}=database(); const data=fixture();
+  const incomplete={...data,intent:{...data.intent,receipt_email:null,shipping:null},status:'processing'};
+  await persistStripeOrder(incomplete,options);
+  db.exec("UPDATE commandes SET statut_expedition='processing'");
+  data.intent.checkout_session_id='cs_test_form123';
+  data.intent.metadata.customer_first_name='Léa'; data.intent.metadata.customer_last_name="O'Connor";
+  await persistStripeOrder(data,options);
+  const row=db.prepare('SELECT client_id,session_stripe_id,statut_paiement,statut_expedition,adresse_livraison_json FROM commandes').get();
+  assert.ok(row.client_id); assert.equal(row.session_stripe_id,'cs_test_form123');
+  assert.equal(row.statut_paiement,'paid'); assert.equal(row.statut_expedition,'processing');
+  assert.equal(JSON.parse(row.adresse_livraison_json).address.line1,'1 rue des Roses');
+  assert.equal(db.prepare('SELECT prenom FROM clients').get().prenom,'Léa'); db.close();
+});

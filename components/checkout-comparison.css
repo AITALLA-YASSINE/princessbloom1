@@ -64,6 +64,10 @@ body:has(.checkout-comparison) footer { display: none; }
 .comparison-grand-total small { font-size: 11px; color: #777; font-weight: 400; }
 .comparison-secure { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #777; margin-top: 23px; }
 .comparison-secure svg { width: 13px; height: 13px; }
+.official-stripe-form { min-width: 0; }
+.official-stripe-loading { display: flex; align-items: center; gap: 10px; min-height: 160px; justify-content: center; color: #756176; font-size: 14px; }
+.official-stripe-loading svg { width: 20px; height: 20px; }
+.official-stripe-retry { display: block; margin-top: 10px; text-decoration: underline; cursor: pointer; }
 @media (min-width: 1000px) {
   .checkout-comparison.checkout-page { background: linear-gradient(90deg,#fff 0%,#fff 55%,#f5f5f5 55%,#f5f5f5 100%); }
   .checkout-comparison .checkout-shell { display: grid; grid-template-columns: minmax(0,1.14fr) minmax(0,1fr); column-gap: 0; }

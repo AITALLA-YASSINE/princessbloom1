@@ -1,35 +1,45 @@
 ﻿import Stripe from "stripe";
 import { NextResponse } from "next/server";
-import { STRIPE_PAYMENT_METHODS } from "@/lib/payment-methods";
-import { getCheckoutTotals, validateCheckoutCustomer } from "@/lib/checkout";
+import { createHash } from "node:crypto";
+import { getCheckoutTotals, COUNTRIES } from "@/lib/checkout";
 import { getStripeSecretKey, stripeFailure } from "@/lib/stripe-config";
 
-// Preserve the hosted checkout endpoint for existing links with the same catalog totals.
+// Checkout Studio form, using server-authoritative catalog prices.
 export async function POST(request: Request) {
   let body;
   try {
     body = await request.json();
-    validateCheckoutCustomer(body.customer);
     getCheckoutTotals(body.cart, body.promoCode);
   } catch (error) {
     return NextResponse.json({ error: error instanceof Error ? error.message : "Commande invalide." }, { status: 400 });
   }
   try {
-    const { customer } = body;
     const totals = getCheckoutTotals(body.cart, body.promoCode);
     const stripe = new Stripe(getStripeSecretKey(), { apiVersion: "2026-09-30.endive" });
     const origin = new URL(request.url).origin;
+    const metadata = { store: "princess_bloom", checkout_form: "true", promo_code: String(body.promoCode || "").trim().toUpperCase(), items: JSON.stringify(totals.items.map((item: { id: string; quantity: number }) => ({ id: item.id, quantity: item.quantity }))) };
+    const idempotencyKey = typeof body.requestId === "string" && /^[a-zA-Z0-9-]{16,100}$/.test(body.requestId)
+      ? createHash("sha256").update(JSON.stringify({ requestId: body.requestId, items: totals.items, promoCode: metadata.promo_code })).digest("hex") : undefined;
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      success_url: `${origin}/confirmation?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}/paiement?status=cancelled`,
-      customer_email: customer.email,
-      allowed_payment_method_types: STRIPE_PAYMENT_METHODS,
+      ui_mode: "form",
+      billing_address_collection: "auto",
+      phone_number_collection: { enabled: false },
+      automatic_tax: { enabled: false },
+      submit_type: "auto",
+      integration_identifier: "custom_embedded_web_0001",
+      return_url: `${origin}/confirmation?session_id={CHECKOUT_SESSION_ID}`,
+      shipping_address_collection: { allowed_countries: COUNTRIES as Stripe.Checkout.SessionCreateParams.ShippingAddressCollection.AllowedCountry[] },
+      shipping_options: [{ shipping_rate_data: { type: "fixed_amount", fixed_amount: { amount: 0, currency: "eur" }, display_name: "Livraison standard offerte", delivery_estimate: { minimum: { unit: "business_day", value: 5 }, maximum: { unit: "business_day", value: 10 } } } }],
+      custom_fields: [
+        { key: "first_name", label: { type: "custom", custom: "Prénom" }, type: "text", optional: true, text: { maximum_length: 100 } },
+        { key: "last_name", label: { type: "custom", custom: "Nom" }, type: "text", text: { maximum_length: 100 } },
+      ],
       line_items: [{ price_data: { currency: "eur", product_data: { name: "Votre commande Princess Bloom", description: totals.items.map((item: { name: string; quantity: number })=>`${item.quantity} × ${item.name}`).join(", ") }, unit_amount: totals.total }, quantity: 1 }],
-      payment_intent_data: { metadata: { store: "princess_bloom", customer_first_name: String(customer.firstName || "").trim().slice(0, 250), customer_last_name: String(customer.lastName || "").trim().slice(0, 250), promo_code: body.promoCode || "", items: JSON.stringify(totals.items.map((item: { id: string; quantity: number }) => ({ id: item.id, quantity: item.quantity }))) }, shipping: { name: `${customer.firstName || ""} ${customer.lastName}`.trim(), address: { line1: customer.address, line2: customer.address2 || undefined, postal_code: customer.postalCode, city: customer.city, country: customer.country } } },
-      metadata: { customer_name: `${customer.firstName || ""} ${customer.lastName}`.trim(), order_total: String(totals.total/100) },
-    });
-    return NextResponse.json({ url: session.url, sessionId: session.id });
+      payment_intent_data: { metadata },
+      metadata,
+    }, idempotencyKey ? { idempotencyKey } : undefined);
+    return NextResponse.json({ client_secret: session.client_secret, sessionId: session.id, amount: session.amount_total });
   } catch (error) {
     const failure = stripeFailure(error);
     return NextResponse.json(failure.body, { status: failure.status });

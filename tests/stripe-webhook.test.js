@@ -79,3 +79,29 @@ test('temporary persistence failures propagate so Stripe retries instead of losi
   f.stripe.paymentIntents.update = async () => { throw new Error('temporary network failure'); };
   await assert.rejects(processStripePaymentEvent(f.event, f.stripe), /temporary network failure/);
 });
+
+test('Checkout form enriches the D1 order with verified session contact, delivery and separate names', async () => {
+  const f = fixture(); f.intent.metadata.checkout_form = 'true';
+  const session = { id: 'cs_test_checkout123', livemode: false, amount_total: 3999, currency: 'eur',
+    customer_details: { email: 'checkout@example.com', phone: null },
+    collected_information: { shipping_details: { name: 'Marie Claire De La Tour', address: { line1: '1 rue des Roses', postal_code: '75002', city: 'Paris', country: 'FR' } } },
+    custom_fields: [{ key: 'first_name', text: { value: 'Marie Claire' } }, { key: 'last_name', text: { value: 'De La Tour' } }] };
+  f.stripe.checkout = { sessions: { list: async params => { assert.equal(params.payment_intent, f.intent.id); return { data: [session] }; } } };
+  let saved;
+  await processStripePaymentEvent(f.event, f.stripe, async data => { saved = data; });
+  assert.equal(saved.intent.receipt_email, 'checkout@example.com');
+  assert.equal(saved.intent.shipping.address.city, 'Paris');
+  assert.equal(saved.intent.metadata.customer_first_name, 'Marie Claire');
+  assert.equal(saved.intent.metadata.customer_last_name, 'De La Tour');
+  assert.equal(saved.intent.checkout_session_id, session.id);
+});
+
+test('Checkout success retries until customer data is ready and rejects inconsistent sessions', async () => {
+  for (const session of [undefined, { livemode: true, amount_total: 3999, currency: 'eur' }, { livemode: false, amount_total: 1, currency: 'eur' }, { livemode: false, amount_total: 3999, currency: 'eur' }]) {
+    const f = fixture(); f.intent.metadata.checkout_form = 'true';
+    f.stripe.checkout = { sessions: { list: async () => ({ data: session ? [session] : [] }) } };
+    let saved = false;
+    await assert.rejects(processStripePaymentEvent(f.event, f.stripe, async () => { saved = true; }));
+    assert.equal(saved, false); assert.equal(f.updates.length, 0);
+  }
+});
