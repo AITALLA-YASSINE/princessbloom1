@@ -1,0 +1,10 @@
+.checkout-address-lookup { position: relative; min-width: 0; }
+.checkout-address-results { position: absolute; top: calc(100% + 5px); left: 0; right: 0; z-index: 30; background: #fffdfd; border: 1px solid #e6cbd4; border-radius: 11px; box-shadow: 0 8px 24px #7817351a; overflow: hidden; }
+.checkout-address-results ul { list-style: none; padding: 4px; margin: 0; max-height: 240px; overflow-y: auto; }
+.checkout-address-results li { padding: 10px 12px; border-radius: 7px; cursor: pointer; color: #4d1427; font-size: 14px; line-height: 1.4; }
+.checkout-address-results li:hover, .checkout-address-results li.is-active { background: #fce7ee; }
+.checkout-address-results strong, .checkout-address-results span { display: block; }
+.checkout-address-results strong { font-weight: 600; }
+.checkout-address-results span { font-size: 12px; color: #756176; }
+.checkout-address-results > small { display: block; border-top: 1px solid #f3e4e9; padding: 6px 12px; font-size: 10px; color: #756176; }
+.checkout-address-status { display: block; margin: 5px 3px 0; color: #756176; font-size: 12px; }
