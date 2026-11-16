@@ -26,7 +26,7 @@ export async function POST(request: Request) {
       receipt_email: customer.email,
       shipping: { name: `${customer.firstName || ""} ${customer.lastName}`.trim(), phone: customer.phone || undefined, address: { line1: customer.address, line2: customer.address2 || undefined, postal_code: customer.postalCode, city: customer.city, country: customer.country } },
       description: totals.items.map((item: { name: string; quantity: number }) => `${item.quantity} × ${item.name}`).join(", "),
-      metadata: { store: "princess_bloom", newsletter_opt_in: customer.newsletter === "true" ? "true" : "false", promo_code: promoCode || "", items: JSON.stringify(totals.items.map((item: { id: string; quantity: number }) => ({ id: item.id, quantity: item.quantity }))) },
+      metadata: { store: "princess_bloom", customer_first_name: String(customer.firstName || "").trim().slice(0, 250), customer_last_name: String(customer.lastName || "").trim().slice(0, 250), newsletter_opt_in: customer.newsletter === "true" ? "true" : "false", promo_code: promoCode || "", items: JSON.stringify(totals.items.map((item: { id: string; quantity: number }) => ({ id: item.id, quantity: item.quantity }))) },
     }, { idempotencyKey });
     return NextResponse.json({ clientSecret: intent.client_secret, amount: intent.amount });
   } catch (error) {

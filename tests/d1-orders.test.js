@@ -45,6 +45,29 @@ test('configuration and Cloudflare failures propagate without exposing secrets',
   await assert.rejects(persistStripeOrder(fixture(),{env,fetch:async()=>({ok:false,status:403})}),/d1_http_403/);
   await assert.rejects(persistStripeOrder(fixture(),{env,fetch:async()=>({ok:true,json:async()=>({success:false})})}),/d1_query_failed/);
 });
+test('exact first and last names stay separate, including compound names and old replays',async()=>{
+  const {db,options}=database(); const data=fixture();
+  data.intent.metadata.customer_first_name='Marie Claire';
+  data.intent.metadata.customer_last_name='De La Tour';
+  await persistStripeOrder(data,options);
+  let client=db.prepare('SELECT prenom,nom FROM clients').get();
+  assert.equal(client.prenom,'Marie Claire'); assert.equal(client.nom,'De La Tour');
+  delete data.intent.metadata.customer_first_name; delete data.intent.metadata.customer_last_name;
+  await persistStripeOrder(data,options);
+  client=db.prepare('SELECT prenom,nom FROM clients').get();
+  assert.equal(client.prenom,'Marie Claire'); assert.equal(client.nom,'De La Tour'); db.close();
+});
+test('generated euro columns format old and future amounts with two decimals automatically',async()=>{
+  const {db,options}=database(); await persistStripeOrder(fixture(),options);
+  db.exec(readFileSync(require.resolve('../d1-display-euros.sql'),'utf8'));
+  assert.equal(db.prepare('SELECT montant_euros FROM paiements').get().montant_euros,'39,99');
+  assert.equal(db.prepare('SELECT prix_unitaire_euros FROM articles_commandes').get().prix_unitaire_euros,'39,99');
+  assert.equal(db.prepare('SELECT total_euros FROM commandes').get().total_euros,'39,99');
+  db.exec('UPDATE paiements SET montant_centimes=14900');
+  assert.equal(db.prepare('SELECT montant_euros FROM paiements').get().montant_euros,'149,00');
+  db.exec('UPDATE paiements SET montant_centimes=5');
+  assert.equal(db.prepare('SELECT montant_euros FROM paiements').get().montant_euros,'0,05'); db.close();
+});
 test('webhook retries database writes even after a Stripe paid marker exists',async()=>{
   const {intent,event}=fixture(); intent.metadata.princessbloom_payment_status='paid';
   const stripe={paymentIntents:{retrieve:async()=>intent}};
