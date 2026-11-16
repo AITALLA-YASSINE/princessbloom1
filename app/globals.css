@@ -600,3 +600,12 @@ body:has(> .pb-header[data-checkout="true"]) > header,body:has(> .pb-header[data
 .homepage-shell .product-card > div::after { content: none; }
 .homepage-shell .hero-product-image { aspect-ratio: 1; }
 .pb-visual { background-color: transparent; }
+/* Keep mobile browsers from zooming when an editable field receives focus.
+   Pinch-to-zoom remains available through the default viewport settings. */
+@media (max-width: 1024px) and (pointer: coarse) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="submit"]):not([type="button"]):not([type="reset"]):not([type="hidden"]):not([type="image"]):not([type="file"]),
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
