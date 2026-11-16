@@ -3,7 +3,7 @@
 -- Money is stored as integer cents: 3999 = EUR 39.99.
 -- Never store card numbers, CVCs, Stripe API keys or client secrets here.
 
-CREATE TABLE IF NOT EXISTS customers (
+CREATE TABLE IF NOT EXISTS clients (
   id TEXT PRIMARY KEY NOT NULL,
   email TEXT NOT NULL COLLATE NOCASE UNIQUE,
   first_name TEXT,
@@ -13,9 +13,9 @@ CREATE TABLE IF NOT EXISTS customers (
   updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
 );
 
-CREATE TABLE IF NOT EXISTS orders (
+CREATE TABLE IF NOT EXISTS commandes (
   id TEXT PRIMARY KEY NOT NULL,
-  customer_id TEXT REFERENCES customers(id),
+  customer_id TEXT REFERENCES clients(id),
   stripe_payment_intent_id TEXT NOT NULL UNIQUE,
   stripe_session_id TEXT UNIQUE,
   payment_status TEXT NOT NULL DEFAULT 'pending'
@@ -36,9 +36,9 @@ CREATE TABLE IF NOT EXISTS orders (
   CHECK (total_cents = subtotal_cents + shipping_cents - discount_cents)
 );
 
-CREATE TABLE IF NOT EXISTS order_items (
+CREATE TABLE IF NOT EXISTS articles_commandes (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  order_id TEXT NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+  order_id TEXT NOT NULL REFERENCES commandes(id) ON DELETE CASCADE,
   product_id TEXT NOT NULL,
   product_name TEXT NOT NULL,
   quantity INTEGER NOT NULL CHECK (quantity BETWEEN 1 AND 20),
@@ -46,9 +46,9 @@ CREATE TABLE IF NOT EXISTS order_items (
   UNIQUE (order_id, product_id)
 );
 
-CREATE TABLE IF NOT EXISTS payments (
+CREATE TABLE IF NOT EXISTS paiements (
   id TEXT PRIMARY KEY NOT NULL,
-  order_id TEXT NOT NULL REFERENCES orders(id),
+  order_id TEXT NOT NULL REFERENCES commandes(id),
   provider TEXT NOT NULL DEFAULT 'stripe' CHECK (provider = 'stripe'),
   stripe_payment_intent_id TEXT NOT NULL UNIQUE,
   status TEXT NOT NULL
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS payments (
   updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
 );
 
-CREATE TABLE IF NOT EXISTS stripe_webhook_events (
+CREATE TABLE IF NOT EXISTS evenements_stripe (
   event_id TEXT PRIMARY KEY NOT NULL,
   event_type TEXT NOT NULL,
   stripe_payment_intent_id TEXT NOT NULL,
@@ -69,9 +69,9 @@ CREATE TABLE IF NOT EXISTS stripe_webhook_events (
   processed_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
 );
 
-CREATE INDEX IF NOT EXISTS orders_customer_id_idx ON orders(customer_id);
-CREATE INDEX IF NOT EXISTS orders_payment_status_idx ON orders(payment_status);
-CREATE INDEX IF NOT EXISTS orders_created_at_idx ON orders(created_at);
-CREATE INDEX IF NOT EXISTS order_items_order_id_idx ON order_items(order_id);
-CREATE INDEX IF NOT EXISTS payments_order_id_idx ON payments(order_id);
-CREATE INDEX IF NOT EXISTS webhook_events_payment_id_idx ON stripe_webhook_events(stripe_payment_intent_id);
+CREATE INDEX IF NOT EXISTS orders_customer_id_idx ON commandes(customer_id);
+CREATE INDEX IF NOT EXISTS orders_payment_status_idx ON commandes(payment_status);
+CREATE INDEX IF NOT EXISTS orders_created_at_idx ON commandes(created_at);
+CREATE INDEX IF NOT EXISTS order_items_order_id_idx ON articles_commandes(order_id);
+CREATE INDEX IF NOT EXISTS payments_order_id_idx ON paiements(order_id);
+CREATE INDEX IF NOT EXISTS webhook_events_payment_id_idx ON evenements_stripe(stripe_payment_intent_id);
