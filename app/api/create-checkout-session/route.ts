@@ -26,7 +26,7 @@ export async function POST(request: Request) {
       customer_email: customer.email,
       allowed_payment_method_types: STRIPE_PAYMENT_METHODS,
       line_items: [{ price_data: { currency: "eur", product_data: { name: "Votre commande Princess Bloom", description: totals.items.map((item: { name: string; quantity: number })=>`${item.quantity} × ${item.name}`).join(", ") }, unit_amount: totals.total }, quantity: 1 }],
-      payment_intent_data: { shipping: { name: `${customer.firstName || ""} ${customer.lastName}`.trim(), address: { line1: customer.address, line2: customer.address2 || undefined, postal_code: customer.postalCode, city: customer.city, country: customer.country } } },
+      payment_intent_data: { metadata: { store: "princess_bloom", promo_code: body.promoCode || "", items: JSON.stringify(totals.items.map((item: { id: string; quantity: number }) => ({ id: item.id, quantity: item.quantity }))) }, shipping: { name: `${customer.firstName || ""} ${customer.lastName}`.trim(), address: { line1: customer.address, line2: customer.address2 || undefined, postal_code: customer.postalCode, city: customer.city, country: customer.country } } },
       metadata: { customer_name: `${customer.firstName || ""} ${customer.lastName}`.trim(), order_total: String(totals.total/100) },
     });
     return NextResponse.json({ url: session.url, sessionId: session.id });
