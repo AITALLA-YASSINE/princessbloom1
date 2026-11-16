@@ -2,6 +2,7 @@ import Stripe from "stripe";
 import { NextResponse } from "next/server";
 import { getStripeSecretKey, stripeFailure } from "@/lib/stripe-config";
 import { processStripePaymentEvent } from "@/lib/stripe-webhook";
+import { persistStripeOrder } from "@/lib/d1-orders";
 
 export async function POST(request: Request) {
   const signature = request.headers.get("stripe-signature");
@@ -29,7 +30,7 @@ export async function POST(request: Request) {
   if (event.livemode === testMode) return NextResponse.json({ error: "Stripe mode mismatch." }, { status: 400 });
 
   try {
-    const result = await processStripePaymentEvent(event, stripe);
+    const result = await processStripePaymentEvent(event, stripe, persistStripeOrder);
     return NextResponse.json({ received: true, ...result });
   } catch (error) {
     // A failure is not acknowledged as successful; Stripe can retry delivery.

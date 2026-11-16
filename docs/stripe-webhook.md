@@ -34,8 +34,20 @@ Cette clé est différente de `STRIPE_SECRET_KEY`. Ne pas la mettre dans Git ou 
 
 Une notification sans signature est refusée avec HTTP 400. Une clé de webhook absente entraîne HTTP 503. Un événement signé sans rapport avec les paiements de la boutique est ignoré avec HTTP 200 ; les événements fictifs envoyés depuis le Dashboard peuvent donc être marqués `ignored`.
 
+## Base de commandes Cloudflare D1
+
+Ajouter dans Vercel (Production) : `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_D1_DATABASE_ID` et `CLOUDFLARE_D1_API_TOKEN` (permission D1 Edit sur le compte concerné). Ne jamais utiliser de préfixe `NEXT_PUBLIC_` pour ces variables.
+
+La base doit contenir le schéma français de `d1-schema.sql`, avec les tables et colonnes françaises. Après déploiement, chaque notification de paiement vérifiée enregistre le client (si un email est disponible), la commande, ses articles, le paiement et l’événement Stripe. Le total reste contrôlé côté serveur. Les numéros de carte, CVC et secrets Stripe ne sont jamais stockés.
+
+Les écritures sont rejouables : une interruption peut laisser une commande partiellement enregistrée, puis Stripe réessaie et complète les données sans doublon. L’événement n’est enregistré qu’en dernier. Un paiement payé ou remboursé ne peut pas être rétrogradé par une ancienne notification. Une configuration D1 manquante ou une erreur Cloudflare provoque HTTP 500 pour permettre la nouvelle livraison Stripe.
+
+Pour vérifier en production : renvoyer depuis Stripe une notification d’un paiement réel de la boutique déjà réussi, puis contrôler la réponse HTTP 200 et la présence du même identifiant `pi_…` dans `commandes` et `paiements`. Cela ne crée aucun nouveau débit. Un événement fictif sans articles Princess Bloom ne valide pas la connexion D1. Cette vérification en ligne nécessite l’accès au Dashboard Stripe ou aux secrets de l’environnement concerné.
+
+Documentation D1 : https://developers.cloudflare.com/api/resources/d1/subresources/database/methods/query/
+
 ## Ce qui n’est pas encore branché
 
-Cette première étape n’ajoute pas de base de commandes, de numéro de commande local, d’e-mail transactionnel ou de déclenchement d’expédition. Ces actions doivent être raccordées à un stockage durable et à un service d’envoi avant de parler d’un traitement automatique complet des commandes. Ne jamais expédier une commande sur la seule base d’une redirection du navigateur ou d’une notification non vérifiée.
+Les e-mails transactionnels et le déclenchement d’expédition ne sont pas encore raccordés. L’identifiant interne de commande est celui du PaymentIntent Stripe. Ne jamais expédier une commande sur la seule base d’une redirection du navigateur ou d’une notification non vérifiée.
 
 Documentation officielle : https://docs.stripe.com/webhooks
