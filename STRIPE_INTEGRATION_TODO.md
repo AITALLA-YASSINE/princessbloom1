@@ -13,3 +13,5 @@
 Variables de lâ€™intÃ©gration active : `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_D1_DATABASE_ID`, `CLOUDFLARE_D1_API_TOKEN`. Conserver des clÃ©s et webhook Stripe du mÃªme environnement test/rÃ©el.
 
 La mise Ã  jour de sÃ©curitÃ© Next.js signalÃ©e par le build reste Ã  prÃ©voir sÃ©parÃ©ment.
+
+Les moyens de paiement du formulaire actif sont désormais dynamiques : aucune liste carte/Klarna ne les limite. Stripe sélectionne les moyens activés dans le Dashboard et éligibles selon la devise, le montant, le pays et l’appareil. Les exclusions Link, Klarna et Amazon Pay du composant express ont été retirées. Vérifier les domaines de paiement et les activations dans le même environnement test/réel avant de tester les portefeuilles.

@@ -2,7 +2,6 @@
 import { createHash } from "node:crypto";
 import { NextResponse } from "next/server";
 import { getCheckoutTotals, validateCheckoutCustomer } from "@/lib/checkout";
-import { STRIPE_PAYMENT_METHODS } from "@/lib/payment-methods";
 import { getStripeSecretKey, stripeFailure } from "@/lib/stripe-config";
 
 export async function POST(request: Request) {
@@ -22,7 +21,7 @@ export async function POST(request: Request) {
     const intent = await stripe.paymentIntents.create({
       amount: totals.total,
       currency: "eur",
-      allowed_payment_method_types: STRIPE_PAYMENT_METHODS as Stripe.PaymentIntentCreateParams.AllowedPaymentMethodType[],
+      automatic_payment_methods: { enabled: true },
       receipt_email: customer.email,
       shipping: { name: `${customer.firstName || ""} ${customer.lastName}`.trim(), phone: customer.phone || undefined, address: { line1: customer.address, line2: customer.address2 || undefined, postal_code: customer.postalCode, city: customer.city, country: customer.country } },
       description: totals.items.map((item: { name: string; quantity: number }) => `${item.quantity} × ${item.name}`).join(", "),
