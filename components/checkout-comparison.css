@@ -17,6 +17,10 @@ body:has(.checkout-comparison) footer { display: none; }
 .checkout-comparison .checkout-form { max-width: none; padding: 0 0 35px; margin: 0; }
 .checkout-comparison .checkout-form h2 { font-size: 20px; color: #181818; font-weight: 600; letter-spacing: -.4px; margin-bottom: 14px; }
 .checkout-comparison .checkout-express h2 { font-size: 13px; font-weight: 400; text-align: center; color: #666; letter-spacing: 0; }
+.checkout-comparison .checkout-express { margin-bottom: 22px; }
+.checkout-comparison .checkout-express h2 { margin-bottom: 18px; font-size: 14px; }
+.checkout-comparison .checkout-divider { display: flex; align-items: center; gap: 16px; margin: 24px 0; color: #777; font-size: 14px; }
+.checkout-comparison .checkout-divider::before, .checkout-comparison .checkout-divider::after { background: #dedede; }
 .checkout-comparison .checkout-contact, .checkout-comparison .checkout-delivery { margin-bottom: 30px; }
 .checkout-comparison .checkout-field { min-height: 50px; padding: 0 12px; border: 1px solid #d9d9d9; border-radius: 14px; background: #fff; box-shadow: none; gap: 8px; }
 .checkout-comparison .checkout-field:focus-within { border-color: #781735; box-shadow: 0 0 0 1px #781735; }
@@ -87,4 +91,15 @@ body:has(.checkout-comparison) footer { display: none; }
   .comparison-summary-content { display: none; padding: 8px 0 25px; }
   .comparison-summary-content.is-open { display: block; }
   .checkout-comparison .checkout-field input, .checkout-comparison .checkout-field select, .comparison-discount input { font-size: 16px; }
+}
+@media (max-width: 599px) {
+  .checkout-comparison .checkout-shell { padding-inline: 14px; }
+  .checkout-comparison .comparison-summary { margin-inline: -14px; padding-inline: 14px; }
+  .checkout-comparison .checkout-field-pair { grid-template-columns: 1fr; gap: 10px; }
+  .checkout-comparison .checkout-field { min-height: 51px; padding-inline: 12px; border-radius: 13px; }
+  .checkout-comparison .checkout-address-grid { gap: 10px; }
+  .checkout-comparison .checkout-form h2 { font-size: 22px; }
+  .checkout-comparison .checkout-express h2 { font-size: 14px; }
+  .checkout-comparison .checkout-contact, .checkout-comparison .checkout-delivery { margin-bottom: 32px; }
+  .checkout-comparison .checkout-checkbox { font-size: 13px; }
 }

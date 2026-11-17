@@ -1,5 +1,11 @@
 # Intégration Stripe Checkout — suivi
 
+## Présentation actuellement utilisée
+
+Pour suivre les captures mobiles Shopify fournies ensuite, `/paiement` utilise désormais [components/payment-checkout.tsx](components/payment-checkout.tsx) : champs personnalisés arrondis, suggestions d’adresses, boutons officiels Stripe Express Checkout en haut et Payment Element pour les champs bancaires. Les boutons Apple Pay / Google Pay utilisent `always` sur les appareils compatibles ; Link est activé lorsqu’éligible. Le paiement passe par l’API PaymentIntent existante et le webhook signé continue d’enregistrer les commandes dans D1. Le prénom et le nom saisis séparément sont conservés dans les métadonnées existantes.
+
+Le formulaire complet Checkout Studio décrit ci-dessous reste dans le dépôt, mais n’est plus celui monté sur `/paiement`. Ses paramètres ne déterminent donc pas l’apparence du formulaire courant. PayPal nécessite encore un raccordement séparé au compte américain, et Shop Pay n’est pas intégré. Aucun bouton de paiement fictif n’est affiché.
+
 ## Values to Replace
 
 Aucun prix fictif ni identifiant `price_...` à remplacer. Le catalogue externe existant est conservé, avec calcul des montants et remises côté serveur. Le mode reste `payment` pour les achats uniques.
