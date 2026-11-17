@@ -16,7 +16,13 @@ import { STRIPE_PAYMENT_METHODS } from "@/lib/payment-methods";
 
 const catalog: Record<string, { name: string; price: number; oldPrice: number }> = CHECKOUT_CATALOG;
 const publicKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY?.trim().replace(/^(['"])([\s\S]*)\1$/, "$2").trim();
-const stripePromise = publicKey ? loadStripe(publicKey, { locale: "fr" }) : null;
+// Keep the same Stripe instance across Fast Refresh updates of this module.
+const stripeCache = globalThis as typeof globalThis & { princessBloomStripe?: { key: string; promise: ReturnType<typeof loadStripe> } };
+if (publicKey && stripeCache.princessBloomStripe?.key !== publicKey) stripeCache.princessBloomStripe = { key: publicKey, promise: loadStripe(publicKey, { locale: "fr" }) };
+const stripePromise = publicKey ? stripeCache.princessBloomStripe!.promise : null;
+function walletDebug(event: string, data: Record<string, unknown>) {
+  if (process.env.NODE_ENV === "development") console.warn("[wallet-debug]", JSON.stringify({ event, ...data }));
+}
 const money = (value: number) => new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(value);
 const countryNames: Record<string, string> = { FR: "France", BE: "Belgique", LU: "Luxembourg", DE: "Allemagne", ES: "Espagne", IT: "Italie", NL: "Pays-Bas", PT: "Portugal", AT: "Autriche", IE: "Irlande" };
 
@@ -44,6 +50,10 @@ function CheckoutForm({ comparison = false }: { comparison?: boolean }) {
   useEffect(() => { if (elements && total > 0) elements.update({ amount: Math.round(total * 100) }); }, [elements, total]);
 
   useEffect(() => {
+    walletDebug("context", { stripe: Boolean(stripe), elements: Boolean(elements), secure: window.location.protocol === "https:", embedded: window.top !== window.self });
+  }, [stripe, elements]);
+
+  useEffect(() => {
     const timeout = window.setTimeout(() => {
       setExpressMessage(window.location.protocol === "https:"
         ? "Le chargement des boutons express prend plus de temps que prévu. Vous pouvez utiliser le formulaire ci-dessous pendant leur chargement."
@@ -53,6 +63,7 @@ function CheckoutForm({ comparison = false }: { comparison?: boolean }) {
   }, [stripe]);
 
   function expressAvailability(available: boolean) {
+    walletDebug("availability", { available });
     setExpressAvailable(available);
     setExpressMessage(available ? "" : "Stripe ne propose aucun paiement express dans cette fenêtre. Ouvrez cette page directement dans Safari, Chrome ou Edge, en dehors d’un aperçu intégré.");
   }
@@ -101,7 +112,7 @@ function CheckoutForm({ comparison = false }: { comparison?: boolean }) {
       {summaryOpen && <div id="checkout-order-details" className="checkout-order-details">{cart.map(item => <div className="checkout-order-item" key={item.id}><Image src={item.image ?? "/photos/product-hero-square.webp"} width={58} height={58} alt="" /><span>{catalog[item.id]?.name ?? item.name}<small>Quantité : {item.quantity}</small></span><b>{money(item.price * item.quantity)}</b></div>)}<div className="checkout-order-line"><span>Sous-total</span><b>{money(subtotal)}</b></div><div className="checkout-order-line"><span>Livraison</span><b>Offerte</b></div>{discount > 0 && <div className="checkout-order-line"><span>Remise</span><b>−{money(discount)}</b></div>}<label className="checkout-promo"><span>Code de réduction</span><input value={promoCode} onChange={event => setPromoCode(event.target.value)} placeholder="Code de réduction" /></label></div>}
     </section>}
     <form ref={formRef} onSubmit={submit} className="checkout-form">
-      <div className="checkout-express-area"><h2>Paiement express</h2><PayPalButton cartPayload={JSON.stringify({ cart: cart.map(({ id, quantity }) => ({ id, quantity })), promoCode })} onPendingChange={setPaypalPending} /><section className={`checkout-express ${expressAvailable === false ? "checkout-express-unavailable" : ""}`} aria-label="Paiement express"><h2>Paiement express</h2><ExpressCheckoutElement options={{ buttonHeight: 55, buttonTheme: { applePay: "black", googlePay: "black", paypal: "gold" }, paymentMethods: { applePay: "always", googlePay: "always", paypal: "auto", link: "auto", klarna: "never", amazonPay: "never" }, paymentMethodOrder: ["paypal", "apple_pay", "google_pay", "link"], layout: { maxColumns: 3, maxRows: 3, overflow: "never" }, emailRequired: true, phoneNumberRequired: false, shippingAddressRequired: true, allowedShippingCountries: COUNTRIES, shippingRates: [{ id: "free", displayName: "Livraison offerte", amount: 0, deliveryEstimate: { minimum: { unit: "business_day", value: 5 }, maximum: { unit: "business_day", value: 10 } } }] }} onReady={event => { if (event.availablePaymentMethods) expressAvailability(Object.values(event.availablePaymentMethods).some(Boolean)); }} onAvailablePaymentMethodsChange={event => expressAvailability(Object.values(event.paymentMethods || {}).some(method => method?.available))} onConfirm={expressConfirm} onShippingAddressChange={event => event.resolve()} onShippingRateChange={event => event.resolve()} onLoadError={() => { setExpressAvailable(false); setExpressMessage("Le chargement Stripe a échoué. Vérifiez votre connexion et les bloqueurs de contenu, puis rechargez la page."); }} />{expressAvailable === null && !expressMessage && <span className="checkout-loading">Recherche des paiements express disponibles…</span>}{expressAvailable === false && <p>Continuez ci-dessous pour choisir votre moyen de paiement.</p>}</section></div>
+      <div className="checkout-express-area"><h2>Paiement express</h2><PayPalButton cartPayload={JSON.stringify({ cart: cart.map(({ id, quantity }) => ({ id, quantity })), promoCode })} onPendingChange={setPaypalPending} /><section className={`checkout-express ${expressAvailable === false ? "checkout-express-unavailable" : ""}`} aria-label="Paiement express"><h2>Paiement express</h2><ExpressCheckoutElement options={{ buttonHeight: 55, buttonTheme: { applePay: "black", googlePay: "black", paypal: "gold" }, paymentMethods: { applePay: "always", googlePay: "always", paypal: "auto", link: "auto", klarna: "never", amazonPay: "never" }, paymentMethodOrder: ["paypal", "apple_pay", "google_pay", "link"], layout: { maxColumns: 3, maxRows: 3, overflow: "never" }, emailRequired: true, phoneNumberRequired: false, shippingAddressRequired: true, allowedShippingCountries: COUNTRIES, shippingRates: [{ id: "free", displayName: "Livraison offerte", amount: 0, deliveryEstimate: { minimum: { unit: "business_day", value: 5 }, maximum: { unit: "business_day", value: 10 } } }] }} onReady={event => { walletDebug("ready", { methods: event.availablePaymentMethods || null }); if (event.availablePaymentMethods) expressAvailability(Object.values(event.availablePaymentMethods).some(Boolean)); }} onAvailablePaymentMethodsChange={event => { walletDebug("change", { methods: event.paymentMethods || null }); expressAvailability(Object.values(event.paymentMethods || {}).some(method => method?.available)); }} onConfirm={expressConfirm} onShippingAddressChange={event => event.resolve()} onShippingRateChange={event => event.resolve()} onLoadError={event => { walletDebug("loaderror", { code: event.error.code || null, type: event.error.type }); setExpressAvailable(false); setExpressMessage("Le chargement Stripe a échoué. Vérifiez votre connexion et les bloqueurs de contenu, puis rechargez la page."); }} />{expressAvailable === null && !expressMessage && <span className="checkout-loading">Recherche des paiements express disponibles…</span>}{expressAvailable === false && <p>Continuez ci-dessous pour choisir votre moyen de paiement.</p>}</section></div>
       {expressAvailable !== true && expressMessage && <p className="checkout-express-notice" role="status">{expressMessage}<a href="https://princessbloom1.vercel.app/paiement" target="_blank" rel="noopener noreferrer">Ouvrir la boutique sécurisée</a></p>}
       {expressAvailable !== false && <div className="checkout-divider"><span>OU</span></div>}
       <section className="checkout-contact"><h2>Contact</h2>{field("email", "Adresse e-mail", <Mail />, { type: "email", required: true, autoComplete: "email" })}<label className="checkout-checkbox"><input type="checkbox" checked={newsletter} onChange={event => setNewsletter(event.target.checked)} /><span><Check /></span>Envoyez-moi des nouvelles et des offres par e-mail</label></section>
