@@ -2,6 +2,8 @@
 
 ## Présentation actuellement utilisée
 
+Le chargement express écoute aussi `availablepaymentmethodschange` et expire après 12 secondes en HTTPS pour éviter un « Recherche… » permanent. Sur le serveur local HTTP, un message indique que les wallets doivent être testés en HTTPS. Un navigateur compatible et un domaine enregistré restent nécessaires : un simple changement de style ne peut pas forcer leur disponibilité.
+
 Le raccordement PayPal séparé est maintenant préparé, avec bouton officiel masqué tant que les identifiants ne sont pas configurés. Pour l’activer et le tester, suivre [docs/paypal-setup.md](docs/paypal-setup.md). Il utilise PayPal directement et ses propres tables D1, sans changer les paiements Stripe.
 
 Pour suivre les captures mobiles Shopify fournies ensuite, `/paiement` utilise désormais [components/payment-checkout.tsx](components/payment-checkout.tsx) : champs personnalisés arrondis, suggestions d’adresses, boutons officiels Stripe Express Checkout en haut et Payment Element pour les champs bancaires. Les boutons Apple Pay / Google Pay utilisent `always` sur les appareils compatibles ; Link est activé lorsqu’éligible. Le paiement passe par l’API PaymentIntent existante et le webhook signé continue d’enregistrer les commandes dans D1. Le prénom et le nom saisis séparément sont conservés dans les métadonnées existantes.

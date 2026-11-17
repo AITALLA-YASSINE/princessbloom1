@@ -29,6 +29,8 @@ body:has(.checkout-comparison) footer { display: none; }
 .checkout-paypal { min-width: 0; }
 .checkout-paypal-message { font-size: 12px; line-height: 1.5; color: #9f2044; }
 .checkout-paypal-recover { padding: 14px 12px; border-radius: 14px; background: #ffd140; color: #162c68; font-size: 13px; font-weight: 600; cursor: pointer; }
+.checkout-express-notice { margin: 0 0 24px; padding: 12px 14px; border: 1px solid #e7e2e4; border-radius: 12px; color: #6f6268; font-size: 12px; line-height: 1.6; background: #faf8f9; }
+.checkout-express-notice a { display: block; margin-top: 5px; color: #781735; text-decoration: underline; text-underline-offset: 3px; }
 .checkout-comparison .checkout-divider { display: flex; align-items: center; gap: 16px; margin: 24px 0; color: #777; font-size: 14px; }
 .checkout-comparison .checkout-divider::before, .checkout-comparison .checkout-divider::after { background: #dedede; }
 .checkout-comparison .checkout-contact, .checkout-comparison .checkout-delivery { margin-bottom: 30px; }
