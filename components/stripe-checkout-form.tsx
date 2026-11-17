@@ -12,7 +12,7 @@ import "./checkout-comparison.css";
 const publicKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY?.trim().replace(/^(['"])([\s\S]*)\1$/, "$2").trim();
 const appearance = {
   theme: "stripe" as const, labels: "auto" as const, inputs: "spaced" as const,
-  variables: { borderRadius: "4px", colorBackground: "#ffffff", colorDanger: "#df1b41", colorPrimary: "#0570de", colorSuccess: "#00c853", colorText: "#30313d", fontFamily: "default", fontSizeBase: "16px", spacingUnit: "4px" },
+  variables: { borderRadius: "14px", colorBackground: "#ffffff", colorDanger: "#df1b41", colorPrimary: "#781735", colorSuccess: "#00c853", colorText: "#30313d", fontFamily: "Arial, Helvetica, sans-serif", fontSizeBase: "16px", spacingUnit: "5px" },
 };
 
 function OfficialForm({ cartPayload, amount }: { cartPayload: string; amount: number }) {
@@ -41,7 +41,14 @@ function OfficialForm({ cartPayload, amount }: { cartPayload: string; amount: nu
         const loaded = await checkout.loadActions();
         if (controller.signal.aborted) return;
         if (loaded.type !== "success") throw new Error("Stripe ne peut pas ouvrir le formulaire. Veuillez réessayer.");
-        form = checkout.createForm({ layout: "expanded" });
+        form = checkout.createForm({
+          layout: "expanded",
+          expressCheckout: {
+            buttonHeight: 55,
+            buttonTheme: { applePay: "black", googlePay: "black", paypal: "gold", klarna: "light" },
+            paymentMethods: { applePay: "always", googlePay: "always", paypal: "auto", link: "auto" },
+          },
+        });
         form.on("ready", () => { if (!controller.signal.aborted) setReady(true); });
         form.on("loaderror", () => { if (!controller.signal.aborted) setError("Le formulaire Stripe n’a pas pu se charger. Vérifiez votre connexion et réessayez."); });
         let confirming = false;

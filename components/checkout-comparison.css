@@ -18,7 +18,7 @@ body:has(.checkout-comparison) footer { display: none; }
 .checkout-comparison .checkout-form h2 { font-size: 20px; color: #181818; font-weight: 600; letter-spacing: -.4px; margin-bottom: 14px; }
 .checkout-comparison .checkout-express h2 { font-size: 13px; font-weight: 400; text-align: center; color: #666; letter-spacing: 0; }
 .checkout-comparison .checkout-contact, .checkout-comparison .checkout-delivery { margin-bottom: 30px; }
-.checkout-comparison .checkout-field { min-height: 50px; padding: 0 12px; border: 1px solid #d9d9d9; border-radius: 8px; background: #fff; box-shadow: none; gap: 8px; }
+.checkout-comparison .checkout-field { min-height: 50px; padding: 0 12px; border: 1px solid #d9d9d9; border-radius: 14px; background: #fff; box-shadow: none; gap: 8px; }
 .checkout-comparison .checkout-field:focus-within { border-color: #781735; box-shadow: 0 0 0 1px #781735; }
 .checkout-comparison .checkout-field input, .checkout-comparison .checkout-field select { font-size: 14px; line-height: 1.4; padding: 13px 0; color: #262626; }
 .checkout-comparison .checkout-field > svg { display: none; }
@@ -51,7 +51,7 @@ body:has(.checkout-comparison) footer { display: none; }
 .comparison-item p { flex: 1; line-height: 1.5; margin: 0; font-size: 12px; }
 .comparison-item > strong { flex: none; font-size: 13px; font-weight: 500; }
 .comparison-discount { display: flex; gap: 10px; margin: 28px 0; }
-.comparison-discount input { min-width: 0; flex: 1; border: 1px solid #d6d6d6; border-radius: 8px; padding: 13px 11px; background: #fff; font-size: 13px; }
+.comparison-discount input { min-width: 0; flex: 1; border: 1px solid #d6d6d6; border-radius: 14px; padding: 13px 11px; background: #fff; font-size: 13px; }
 .comparison-discount button { border: 1px solid #d6d6d6; background: #fafafa; border-radius: 8px; padding: 0 14px; font-size: 13px; color: #444; cursor: pointer; }
 .comparison-discount input:focus-visible, .comparison-discount button:focus-visible { outline: 2px solid #781735; outline-offset: 2px; }
 .comparison-promo-error, .comparison-promo-success { font-size: 12px; margin: -18px 0 24px; color: #9f2044; }
