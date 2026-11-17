@@ -2,7 +2,9 @@
 
 ## Présentation actuellement utilisée
 
-Le chargement express écoute aussi `availablepaymentmethodschange` et expire après 12 secondes en HTTPS pour éviter un « Recherche… » permanent. Sur le serveur local HTTP, un message indique que les wallets doivent être testés en HTTPS. Un navigateur compatible et un domaine enregistré restent nécessaires : un simple changement de style ne peut pas forcer leur disponibilité.
+Diagnostic HTTPS réalisé : la page déployée contient le dernier code et la même clé publique de test que l’environnement local ; le domaine `princessbloom1.vercel.app` est déclaré actif pour Apple Pay et Google Pay dans ce compte. Un paiement de test par l’API réelle du site à 3 999 centimes a atteint `succeeded`, puis le marqueur Stripe écrit après la persistance D1 est passé à `paid`. Aucun débit réel. Cela valide le serveur et le webhook, pas l’affichage des wallets : le service de navigateur connecté est indisponible et aucun bouton Apple Pay / Google Pay n’a pu être cliqué dans cette session. `/api/paypal/config` renvoie encore `enabled: false` sur le site tant que les identifiants ne sont pas fournis.
+
+Le chargement express écoute aussi `availablepaymentmethodschange`. Après 12 secondes en HTTPS, seul le texte de chargement change : le conteneur Stripe reste monté et visible pour ne pas interrompre la détection des boutons. Une absence de réponse ne doit pas être assimilée à une indisponibilité du navigateur. Sur le serveur local HTTP, un message indique que les wallets doivent être testés en HTTPS. Un navigateur compatible et un domaine enregistré restent nécessaires : un simple changement de style ne peut pas forcer leur disponibilité.
 
 Le raccordement PayPal séparé est maintenant préparé, avec bouton officiel masqué tant que les identifiants ne sont pas configurés. Pour l’activer et le tester, suivre [docs/paypal-setup.md](docs/paypal-setup.md). Il utilise PayPal directement et ses propres tables D1, sans changer les paiements Stripe.
 

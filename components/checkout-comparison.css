@@ -25,7 +25,7 @@ body:has(.checkout-comparison) footer { display: none; }
 .checkout-comparison .checkout-express-area .checkout-express h2 { display: none; }
 .checkout-comparison .checkout-express-area:has(.checkout-paypal) { grid-template-columns: minmax(105px,1fr) minmax(0,2fr); }
 .checkout-comparison .checkout-express-area:has(.checkout-express-unavailable) { grid-template-columns: 1fr; }
-.checkout-comparison .checkout-express-area:not(:has(.checkout-paypal)):has(.checkout-express-unavailable) { display: none; }
+.checkout-comparison .checkout-express-unavailable { display: block; }
 .checkout-paypal { min-width: 0; }
 .checkout-paypal-message { font-size: 12px; line-height: 1.5; color: #9f2044; }
 .checkout-paypal-recover { padding: 14px 12px; border-radius: 14px; background: #ffd140; color: #162c68; font-size: 13px; font-weight: 600; cursor: pointer; }
