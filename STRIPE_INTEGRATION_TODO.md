@@ -2,6 +2,8 @@
 
 ## Présentation actuellement utilisée
 
+Le raccordement PayPal séparé est maintenant préparé, avec bouton officiel masqué tant que les identifiants ne sont pas configurés. Pour l’activer et le tester, suivre [docs/paypal-setup.md](docs/paypal-setup.md). Il utilise PayPal directement et ses propres tables D1, sans changer les paiements Stripe.
+
 Pour suivre les captures mobiles Shopify fournies ensuite, `/paiement` utilise désormais [components/payment-checkout.tsx](components/payment-checkout.tsx) : champs personnalisés arrondis, suggestions d’adresses, boutons officiels Stripe Express Checkout en haut et Payment Element pour les champs bancaires. Les boutons Apple Pay / Google Pay utilisent `always` sur les appareils compatibles ; Link est activé lorsqu’éligible. Le paiement passe par l’API PaymentIntent existante et le webhook signé continue d’enregistrer les commandes dans D1. Le prénom et le nom saisis séparément sont conservés dans les métadonnées existantes.
 
 Le formulaire complet Checkout Studio décrit ci-dessous reste dans le dépôt, mais n’est plus celui monté sur `/paiement`. Ses paramètres ne déterminent donc pas l’apparence du formulaire courant. PayPal nécessite encore un raccordement séparé au compte américain, et Shop Pay n’est pas intégré. Aucun bouton de paiement fictif n’est affiché.

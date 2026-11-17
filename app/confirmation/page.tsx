@@ -4,6 +4,7 @@ import Stripe from "stripe";
 import { connection } from "next/server";
 import { getStripeSecretKey } from "@/lib/stripe-config";
 import { Check, CircleHelp, LockKeyhole } from "lucide-react";
+import { createPayPalService } from "@/lib/paypal";
 
 async function VerifiedConfirmation({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   await connection();
@@ -11,7 +12,13 @@ async function VerifiedConfirmation({ searchParams }: { searchParams: Promise<Re
   let state: "paid" | "processing" | "pending" = "pending";
   let amount: number | null = null;
   let currency = "EUR";
-  if (process.env.STRIPE_SECRET_KEY) {
+  if (typeof params.paypal_order === "string") {
+    try {
+      const order = await createPayPalService().read(params.paypal_order);
+      state = order.statut === "paid" ? "paid" : order.statut === "processing" ? "processing" : "pending";
+      if (state !== "pending") amount = order.total_centimes / 100;
+    } catch { /* Only a verified, persisted capture can confirm a PayPal order. */ }
+  } else if (process.env.STRIPE_SECRET_KEY) {
     try {
       const stripe = new Stripe(getStripeSecretKey(), { apiVersion: "2026-09-30.endive" });
       if (typeof params.payment_intent === "string" && typeof params.payment_intent_client_secret === "string") {
